@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "01E7vAgv3dc+M35uqvYZ4wbrDBSNdsuuJbQyxwqPUYWiLsp4MvtFnayHtML1hprRgz/fzIKov+L1QiuNMx32jA==",
+  "dgSpecHash": "+fEUwqKewhoUTLYj9U4Kyhyn7UBY+0+ymxsV5SFue5Rr55J0UqqBcAA5zUpk1LU9/Ssf3fTdiD0k/zoxuZSlng==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\FRONTEND\\CanEatWebApp\\CanEatWebApp\\CanEatWebApp.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\FRONTEND\\CanEatWebApp\\CanEatWebApp\\CanEatWebApp.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://202.58.172.152/binus_ws_nuget-DevOPS/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
-    }
-  ]
+  "logs": []
 }
