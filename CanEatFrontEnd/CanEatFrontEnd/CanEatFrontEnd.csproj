@@ -7,12 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Customer\DishDetail\" />
+    <Folder Include="Views\Customer\Cart\" />
+    <Folder Include="Views\Customer\Receipt\" />
+    <Folder Include="Views\Customer\ShopDetail\" />
+    <Folder Include="Views\Vendor\Home\" />
+    <Folder Include="Views\Vendor\FoodEdit\" />
+    <Folder Include="Views\Vendor\Schedule\" />
+    <Folder Include="Views\Vendor\ShopDetailEdit\" />
     <Folder Include="wwwroot\Assets\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\Assets\galaxy.jpg" />
     <None Include="wwwroot\Assets\nebula.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
   </ItemGroup>
 
 </Project>

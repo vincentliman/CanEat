@@ -12,20 +12,28 @@ build_property.RootNamespace = CanEatFrontEnd
 build_property.ProjectDir = C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Order/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5kZXguY3NodG1s
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Order/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcT3JkZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Master/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzdGVyXExvZ2luXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Master/Register/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFzdGVyXFJlZ2lzdGVyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Shared/Error.cshtml]
