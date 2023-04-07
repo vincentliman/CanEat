@@ -8,10 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Views\Customer\DishDetail\" />
-    <Folder Include="Views\Customer\Cart\" />
     <Folder Include="Views\Customer\Receipt\" />
     <Folder Include="Views\Customer\ShopDetail\" />
-    <Folder Include="Views\Vendor\Home\" />
     <Folder Include="Views\Vendor\FoodEdit\" />
     <Folder Include="Views\Vendor\Schedule\" />
     <Folder Include="Views\Vendor\ShopDetailEdit\" />
