@@ -20,9 +20,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-
-app.MapControllerRoute(
-    name: "Customer_Home",
-    pattern: "Customer/{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "Landing_Page",
+        pattern: "{controller=LandingPage}/{action=Index}/{id?}",
+        defaults: new { controller = "LandingPage", action = "Index" });
+});
 
 app.Run();

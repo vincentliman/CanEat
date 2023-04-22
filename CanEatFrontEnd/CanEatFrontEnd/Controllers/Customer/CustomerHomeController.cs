@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace CanEatFrontEnd.Controllers.Customer
 {
-    public class HomeController : Controller
+    public class CustomerHomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<CustomerHomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public CustomerHomeController(ILogger<CustomerHomeController> logger)
         {
             _logger = logger;
         }
