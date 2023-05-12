@@ -21,7 +21,6 @@ C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\scopedcss\bundle\CanEatFrontEnd.styles.css
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\scopedcss\projectbundle\CanEatFrontEnd.bundle.scp.css
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\CanEatFrontEnd.dll
@@ -352,3 +351,4 @@ C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\bin\Debug\net6.
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\CanEatFrontEnd.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\CanEatFrontEnd.csproj.CopyComplete
+C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd\obj\Debug\net6.0\scopedcss\Views\Shared\_GuestLayout.cshtml.rz.scp.css

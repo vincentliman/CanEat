@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Admin\" />
-    <Folder Include="Views\Customer\DishDetail\" />
-    <Folder Include="Views\Customer\Receipt\" />
-    <Folder Include="Views\Customer\ShopDetail\" />
     <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Vendor\Schedule\" />
     <Folder Include="Views\Vendor\ShopDetailEdit\" />
     <Folder Include="wwwroot\Assets\" />
   </ItemGroup>

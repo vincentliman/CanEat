@@ -179,3 +179,41 @@ hr {
     margin-top: 5rem;
     text-align: center;
 }
+
+input {
+    margin: 0.4rem 0;
+}
+
+.titleCart {
+    display: flex;
+}
+
+.payment-amount {
+    display: flex;
+}
+
+.schedule-cart {
+    display: flex;
+}
+
+.titleCartMenu {
+    display: flex;
+}
+
+.shopDetail {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    /*.shopDetail .shopDetail-img{
+    flex:  1 1 45rem;
+}
+*/
+    .shopDetail .shopDetail-img img {
+        width: 20vw;
+    }
+
+    .shopDetail .content {
+        flex: 1 1 35rem;
+        padding: 0 1rem;
+    }
