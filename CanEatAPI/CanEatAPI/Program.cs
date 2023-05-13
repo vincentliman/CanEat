@@ -16,6 +16,10 @@ builder.Services.AddDbContext<CanEatDBContext>
 );
 
 builder.Services.AddScoped<CompanyHelper>();
+builder.Services.AddScoped<FoodHelper>();
+builder.Services.AddScoped<ShopHelper>();
+builder.Services.AddScoped<CustomerHelper>();
+
 
 var app = builder.Build();
 

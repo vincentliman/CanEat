@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CanEatAPI.Helper;
 using CanEatAPI.Output;
+using CanEatAPI.Input;
 
 namespace CanEatAPI.Controllers
 {
@@ -24,6 +25,52 @@ namespace CanEatAPI.Controllers
             {
                 var objJSON = new CompanyOutput();
                 objJSON.payload = companyHelper.GetAllCompanies();
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Produces("application/json")]
+        public IActionResult Post(CompanyInput data)
+        {
+            try
+            {
+                var objJSON = companyHelper.CreateCompany(data);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Produces("application/json")]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                var objJSON = companyHelper.DeleteCompany(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPatch]
+        [Produces("application/json")]
+        public IActionResult Patch(CompanyInput data)
+        {
+            try
+            {
+                var objJSON = companyHelper.UpdateCompany(data);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)

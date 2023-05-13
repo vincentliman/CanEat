@@ -1,13 +1,13 @@
 ﻿using CanEatAPI.Helper;
 using CanEatAPI.Input;
 using CanEatAPI.Models;
+using CanEatAPI.Output;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CanEatAPI.Controllers
 {
-    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class ShopController : ControllerBase
@@ -26,6 +26,71 @@ namespace CanEatAPI.Controllers
             try
             {
                 var objJSON = shopHelper.CreateShop(data);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        [Produces("application/json")]
+
+        public IActionResult Get()
+        {
+            try
+            {
+                var objJSON = new ShopOutput();
+                objJSON.payload = shopHelper.GetAllShops();
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        [Produces("application/json")]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                var objJSON = shopHelper.DeleteShop(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Produces("application/json")]
+        public IActionResult Patch(ShopInput data)
+        {
+            try
+            {
+                var objJSON = shopHelper.UpdateShop(data);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{email}, {password}")]
+        [Produces("application/json")]
+        public IActionResult GetShop(string email, string password)
+        {
+            try
+            {
+                var objJSON = new LoginOutput();
+                objJSON.payload2 = shopHelper.LoginShop(email, password);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
