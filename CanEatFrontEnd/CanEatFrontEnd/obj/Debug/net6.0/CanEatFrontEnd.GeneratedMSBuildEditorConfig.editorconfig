@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\HP\Desktop\RMCS-SE\CanEat\CanEatFrontEnd\CanEatFrontEnd
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Admin/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,10 +30,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Customer/Order/Index.cshtml]
@@ -82,6 +82,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Vendor/Register/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXFJlZ2lzdGVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/Vendor/ShopDetailEdit/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZG9yXFNob3BEZXRhaWxFZGl0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/HP/Desktop/RMCS-SE/CanEat/CanEatFrontEnd/CanEatFrontEnd/Views/_ViewImports.cshtml]

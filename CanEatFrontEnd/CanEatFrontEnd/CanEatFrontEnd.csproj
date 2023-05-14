@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Admin\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Vendor\ShopDetailEdit\" />
     <Folder Include="wwwroot\Assets\" />
   </ItemGroup>
 
