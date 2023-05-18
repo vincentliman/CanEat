@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj": {}
+    "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj": {
+    "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj",
         "projectName": "CanEatAPI",
-        "projectPath": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj",
+        "projectPath": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\CanEatAPI\\CanEatAPI\\CanEatAPI.csproj",
         "packagesPath": "C:\\Users\\Liman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatAPI\\CanEatAPI\\obj\\",
+        "outputPath": "C:\\Users\\Liman\\OneDrive\\Documents\\SEMESTER 4\\RMCS - LEC\\CanEatProject\\CanEat\\CanEatAPI\\CanEatAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Liman\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,14 @@
             "EntityFramework": {
               "target": "Package",
               "version": "[6.4.4, )"
+            },
+            "Microsoft.AspNet.Cors": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
