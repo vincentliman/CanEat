@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_CustomerLayout";
+}
+<div class="header">
+    <img class="back-btn" src="" />
+    <h3>Dish Details</h3>
+</div>
+<div class="dish-detail">
+    <img class="food-img"/>
+    <div class="food-info">
+        <div class="food-name"></div>
+        <div class="food-price"></div>
+        <div class="food-description"></div>
+    </div>
+    <div class="quantity-info">
+        <form>
+            <h5>Quantity</h5>
+            <h6>*Required</h6>
+            <div class="btn-group">
+                <button id="minus-btn" type="button" class="btn btn-secondary">-</button>
+                <input type="number" value="0" readonly="true"/>
+                <button id="plus-btn" type="button" class="btn btn-secondary">+</button>
+            </div>
+        </form>
+    </div>
+    <div class="notes-info">
+        <h5>Notes</h5>
+        <h6>optional</h6>
+        <form>
+            <input type="text" />
+        </form>
+    </div>
+    <div class="cart-btn">
+        <button id="cart-btn" type="button" class="btn btn-primary">Add to Cart</button>
+    </div>
+</div>
