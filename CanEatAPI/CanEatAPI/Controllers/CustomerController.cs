@@ -39,7 +39,7 @@ namespace CanEatAPI.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Post(CustomerInput data)
+        public IActionResult Post(CreateCustomerInput data)
         {
             try
             {

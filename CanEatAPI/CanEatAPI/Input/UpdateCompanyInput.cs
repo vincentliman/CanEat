@@ -1,8 +1,8 @@
 ﻿namespace CanEatAPI.Input
 {
-    public class CompanyInput
+    public class UpdateCompanyInput
     {
-        public string? id { get; set; }
+        public Guid? id { get; set; }
         public string? name { get; set; }
         public string? address { get; set; }
         public string? phone { get; set; }

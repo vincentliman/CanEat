@@ -25,8 +25,8 @@ namespace CanEatAPI.Helper
 
                 returnValue = customers.Select(customer => new Customer()
                 {
-                    id = customer.id,
-                    //shop_id = shop.id,
+                    id = customer.id.ToString(),
+                    company_id = customer.company_id.ToString(),
                     name = customer.name,
                     email = customer.email,
                     password = customer.password,
@@ -41,7 +41,7 @@ namespace CanEatAPI.Helper
         }
 
 
-        public StatusOutput CreateCustomer(CustomerInput? data)
+        public StatusOutput CreateCustomer(CreateCustomerInput? data)
         {
             var returnValue = new StatusOutput();
 
@@ -49,7 +49,7 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var company = dBContext.MsCompany.Where(x => x.id == data.company_id).FirstOrDefault();
+                    var company = dBContext.MsCompany.Where(x => x.name.Equals(data.company_name)).FirstOrDefault();
                     var existing = dBContext.MsCustomer.Where(x=>x.email == data.email).FirstOrDefault();
 
                     if(existing != null)
@@ -66,12 +66,12 @@ namespace CanEatAPI.Helper
                         return returnValue;
                    }
 
-                    if (data.id == null)
-                    {
-                        returnValue.statusCode = 204;
-                        returnValue.message = "id cannot be empty";
-                        return returnValue;
-                    }
+                    //if (data.id == null)
+                    //{
+                    //    returnValue.statusCode = 204;
+                    //    returnValue.message = "id cannot be empty";
+                    //    return returnValue;
+                    //}
 
                     if (data.name == null)
                     {
@@ -104,7 +104,7 @@ namespace CanEatAPI.Helper
 
                     var customer = new MsCustomer
                     {
-                        id = data.id,
+                        id = Guid.NewGuid(),
                         company_id = company.id,
                         name = data.name,
                         email = data.email,
@@ -144,8 +144,8 @@ namespace CanEatAPI.Helper
                     var pass = dBContext.MsCustomer.Where(x => x.password == password).FirstOrDefault();
                     if (pass != null)
                     {
-                        returnValue.id = customerData.id;
-                        returnValue.company_id = customerData.company_id;
+                        //returnValue.id = customerData.id;
+                        //returnValue.company_id = customerData.company_id;
                         returnValue.name = customerData.name;
                         returnValue.email = customerData.email;
                         return returnValue;

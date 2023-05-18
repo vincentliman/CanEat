@@ -35,7 +35,7 @@ namespace CanEatAPI.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Post(CompanyInput data)
+        public IActionResult Post(CreateCompanyInput data)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace CanEatAPI.Controllers
 
         [HttpPatch]
         [Produces("application/json")]
-        public IActionResult Patch(CompanyInput data)
+        public IActionResult Patch(UpdateCompanyInput data)
         {
             try
             {

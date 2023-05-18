@@ -2,6 +2,7 @@
 using CanEatAPI.Output;
 using CanEatAPI.Models;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using System.ComponentModel.Design;
 
 namespace CanEatAPI.Helper
 {
@@ -21,7 +22,8 @@ namespace CanEatAPI.Helper
 
             try
             {
-                var shop = dBContext.MsShop.Where(x => x.id == id).FirstOrDefault();
+                Guid shopId = Guid.Parse(id);
+                var shop = dBContext.MsShop.ToList().FirstOrDefault(x => shopId == x.id);
                 if (shop == null)
                 {
                     returnValue.statusCode = 404;
@@ -49,12 +51,12 @@ namespace CanEatAPI.Helper
             try
             {
                 var shops = dBContext.MsShop.ToList();
-                var company = dBContext.MsCompany.ToList();
+                //var company = dBContext.MsCompany.ToList();
 
                 returnValue = shops.Select(shop => new Shop()
                 {
-                    id = shop.id,
-                    //company_id = company.id,
+                    id = shop.id.ToString(),
+                    company_id = shop.company_id.ToString(),
                     name = shop.name,
                     email = shop.email,
                     password = shop.password,
@@ -69,14 +71,14 @@ namespace CanEatAPI.Helper
             }
         }
 
-        public StatusOutput UpdateShop(ShopInput data)
+        public StatusOutput UpdateShop(UpdateShopInput data)
         {
             var returnValue = new StatusOutput();
 
             try
             {
                 var shop = dBContext.MsShop.Where(x => x.id == data.id).FirstOrDefault();
-                var company = dBContext.MsCompany.Where(x => x.id == data.company_id).FirstOrDefault();
+                var company = dBContext.MsCompany.Where(x => x.name.Equals(data.company_name)).FirstOrDefault();
 
                 if (shop == null)
                 {
@@ -131,7 +133,7 @@ namespace CanEatAPI.Helper
 
 
 
-        public StatusOutput CreateShop(ShopInput? data)
+        public StatusOutput CreateShop(CreateShopInput? data)
         {
             var returnValue = new StatusOutput();
 
@@ -139,7 +141,7 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var company = dBContext.MsCompany.Where(x => x.id == data.company_id).FirstOrDefault();
+                    var company = dBContext.MsCompany.Where(x => x.name.Equals(data.company_name)).FirstOrDefault();
 
                     if (company == null)
                     {
@@ -148,12 +150,12 @@ namespace CanEatAPI.Helper
                         return returnValue;
                     }
 
-                    if (data.id == null)
-                    {
-                        returnValue.statusCode = 204;
-                        returnValue.message = "id cannot be empty";
-                        return returnValue;
-                    }
+                    //if (data.id == null)
+                    //{
+                    //    returnValue.statusCode = 204;
+                    //    returnValue.message = "id cannot be empty";
+                    //    return returnValue;
+                    //}
 
                     if (data.name == null)
                     {
@@ -185,7 +187,7 @@ namespace CanEatAPI.Helper
 
                     var shop = new MsShop
                     {
-                        id = data.id,
+                        id = Guid.NewGuid(),
                         company_id = company.id,
                         name = data.name,
                         email= data.email,
@@ -215,41 +217,41 @@ namespace CanEatAPI.Helper
 
 
 
-        public ShopData? LoginShop(string email, string password)
-        {
-            var returnValue = new ShopData();
-            try
-            {
-                var shopData = dBContext.MsShop.Where(x => x.email == email).FirstOrDefault();
-                //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
-                if (shopData != null)
-                {
-                    var pass = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
-                    if (pass != null)
-                    {
-                        returnValue.id = shopData.id;
-                        returnValue.company_id = shopData.company_id;
-                        returnValue.name = shopData.name;
-                        return returnValue;
+        //public ShopData? LoginShop(string email, string password)
+        //{
+        //    var returnValue = new ShopData();
+        //    try
+        //    {
+        //        var shopData = dBContext.MsShop.Where(x => x.email == email).FirstOrDefault();
+        //        //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
+        //        if (shopData != null)
+        //        {
+        //            var pass = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
+        //            if (pass != null)
+        //            {
+        //                returnValue.id = shopData.id;
+        //                returnValue.company_id = shopData.company_id;
+        //                returnValue.name = shopData.name;
+        //                return returnValue;
 
-                    }
-                    else
-                    {
-                        return null;
-                    }
+        //            }
+        //            else
+        //            {
+        //                return null;
+        //            }
 
 
 
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
     }
 }

@@ -20,7 +20,8 @@ namespace CanEatAPI.Helper
 
             try
             {
-                var company = dBContext.MsCompany.Where(x => x.id == id).FirstOrDefault();
+                Guid companyId = Guid.Parse(id);
+                var company = dBContext.MsCompany.ToList().FirstOrDefault(x => companyId == x.id);
                 if (company == null)
                 {
                     returnValue.statusCode = 404;
@@ -51,7 +52,7 @@ namespace CanEatAPI.Helper
 
                 returnValue = companies.Select(company => new Company()
                 {
-                    id = company.id,
+                    id = company.id.ToString(),
                     name = company.name,
                     address = company.address,
                     phone = company.phone,
@@ -65,7 +66,7 @@ namespace CanEatAPI.Helper
         }
 
 
-        public StatusOutput UpdateCompany(CompanyInput data)
+        public StatusOutput UpdateCompany(UpdateCompanyInput data)
         {
             var returnValue = new StatusOutput();
 
@@ -111,7 +112,7 @@ namespace CanEatAPI.Helper
 
 
 
-        public StatusOutput CreateCompany(CompanyInput? data)
+        public StatusOutput CreateCompany(CreateCompanyInput? data)
         {
             var returnValue = new StatusOutput();
 
@@ -120,12 +121,12 @@ namespace CanEatAPI.Helper
                 if (data != null)
                 {
 
-                    if (data.id == null)
+/*                    if (data.id == null)
                     {
                         returnValue.statusCode = 204;
                         returnValue.message = "id cannot be empty";
                         return returnValue;
-                    }
+                    }*/
 
                     if (data.name == null)
                     {
@@ -151,7 +152,7 @@ namespace CanEatAPI.Helper
 
                     var company = new MsCompany
                     {
-                        id = data.id,
+                        id = Guid.NewGuid(),
                         name = data.name,
                         address = data.address,
                         phone = data.phone,
