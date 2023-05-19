@@ -2,7 +2,7 @@
 
 namespace CanEatFrontEnd.Controllers.Vendor
 {
-	public class RegisterVendorController : Controller
+	public class VendorRegisterController : Controller
 	{
 		public IActionResult Index()
 		{

@@ -2,11 +2,11 @@
 
 namespace CanEatFrontEnd.Controllers.Vendor
 {
-    public class FoodEditController : Controller
+    public class VendorShopInfoController : Controller
     {
         public IActionResult Index()
         {
-            return View("Views/Vendor/FoodEdit/Index.cshtml");
+            return View("Views/Vendor/ShopInfo/Index.cshtml");
         }
     }
 }

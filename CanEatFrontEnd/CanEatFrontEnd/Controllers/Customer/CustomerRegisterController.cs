@@ -2,7 +2,7 @@
 
 namespace CanEatFrontEnd.Controllers.Customer
 {
-	public class RegisterCustomerController : Controller
+	public class CustomerRegisterController : Controller
 	{
 		public IActionResult Index()
 		{

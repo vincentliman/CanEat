@@ -2,11 +2,11 @@
 
 namespace CanEatFrontEnd.Controllers.Customer
 {
-    public class ReceiptController : Controller
+    public class CustomerShopDetailController : Controller
     {
         public IActionResult Index()
         {
-            return View("Views/Customer/Receipt/Index.cshtml");
+            return View("Views/Customer/ShopDetail/Index.cshtml");
         }
     }
 }

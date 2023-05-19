@@ -74,7 +74,9 @@ body {
     }
 
     .Register-container form input[type=text],
-    .Register-container form input[type=email] {
+    .Register-container form input[type=email],
+    .Register-container form input[type=number],
+    .Register-container form input[type=file] {
         width: 100%;
         padding: .5rem 1rem;
         border: none;
@@ -90,6 +92,15 @@ body {
     .Register-container form #message {
         font-family: 'Quicksand', sans-serif;
         padding-bottom: 5rem;
+    }
+
+    .Register-container .form-control {
+        width: 100%;
+        padding: .5rem 1rem;
+        border: none;
+        outline: none;
+        border: 1px solid #CED0D2;
+        border-radius: .25rem;
     }
 
 .Register-footer {
@@ -217,3 +228,43 @@ input {
         flex: 1 1 35rem;
         padding: 0 1rem;
     }
+
+.restaurant-header {
+    position: relative;
+}
+
+    .restaurant-header img {
+        width: 100%;
+        height: auto;
+    }
+
+.restaurant-content {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: 18px;
+    color: white;
+}
+
+.restaurant-location {
+    display: flex;
+}
+
+.restaurant-rating {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    font-size: 18px;
+    color: white;
+    display: flex;
+}
+
+.order-day h1 {
+    color: white;
+    background-color: cornflowerblue;
+    text-align: center;
+}
+
+.vendor-button {
+    text-align: end;
+}
