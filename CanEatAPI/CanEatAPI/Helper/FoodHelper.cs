@@ -15,14 +15,14 @@ namespace CanEatAPI.Helper
         }
 
 
-        public StatusOutput UpdateFood(FoodInput data)
+        public StatusOutput UpdateFood(UpdateFoodInput data)
         {
             var returnValue = new StatusOutput();
 
             try
             {
-                var shop = dBContext.MsShop.Where(x => x.id == data.shop_id).FirstOrDefault();
-                var food = dBContext.MsFood.Where(x => x.id == data.id).FirstOrDefault();
+                var food = dBContext.MsFood.Where(x => x.id==data.id).FirstOrDefault();
+                var shop = dBContext.MsShop.Where(x => x.name.Equals(data.shop_name)).FirstOrDefault();
 
                 if (shop == null)
                 {
@@ -78,7 +78,8 @@ namespace CanEatAPI.Helper
 
             try
             {
-                var food = dBContext.MsFood.Where(x => x.id == id).FirstOrDefault();
+                Guid foodId = Guid.Parse(id);
+                var food = dBContext.MsFood.Where(x => foodId == x.id).FirstOrDefault();
                 if (food == null)
                 {
                     returnValue.statusCode = 404;
@@ -110,8 +111,8 @@ namespace CanEatAPI.Helper
 
                 returnValue = foods.Select(food => new Food()
                 {
-                    id = food.id,
-                    //shop_id = shop.id,
+                    id = food.id.ToString(),
+                    shop_id = food.shop_id.ToString(),
                     name = food.name,
                     price = food.price,
                     photo = food.photo,
@@ -126,7 +127,7 @@ namespace CanEatAPI.Helper
         }
 
 
-        public StatusOutput CreateFood(FoodInput? data)
+        public StatusOutput CreateFood(CreateFoodInput? data)
         {
             var returnValue = new StatusOutput();
 
@@ -134,7 +135,7 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var shop = dBContext.MsShop.Where(x => x.id == data.shop_id).FirstOrDefault();
+                    var shop = dBContext.MsShop.Where(x => x.name.Equals(data.shop_name)).FirstOrDefault();
                     
 
                     if (shop == null)
@@ -144,12 +145,12 @@ namespace CanEatAPI.Helper
                         return returnValue;
                     }
 
-                    if (data.id == null)
-                    {
-                        returnValue.statusCode = 204;
-                        returnValue.message = "id cannot be empty";
-                        return returnValue;
-                    }
+                    //if (data.id == null)
+                    //{
+                    //    returnValue.statusCode = 204;
+                    //    returnValue.message = "id cannot be empty";
+                    //    return returnValue;
+                    //}
 
                     if (data.name == null)
                     {
@@ -182,7 +183,7 @@ namespace CanEatAPI.Helper
 
                     var food = new MsFood
                     {
-                        id = data.id,
+                        id = Guid.NewGuid(),
                         shop_id = shop.id,
                         name = data.name,
                         price = (int)data.price,
@@ -214,29 +215,29 @@ namespace CanEatAPI.Helper
 
 
 
-        public FoodData? GetFood(string id)
-        {
-            var returnValue = new FoodData();
-            try
-            {
-                var foodData = dBContext.MsFood.Where(x => x.id == id).FirstOrDefault();
-                //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
-                if (foodData != null)
-                {
-                        returnValue.id = foodData.id;
-                        returnValue.name =  foodData.name;
-                        return returnValue;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public FoodData? GetFood(string id)
+        //{
+        //    var returnValue = new FoodData();
+        //    try
+        //    {
+        //        var foodData = dBContext.MsFood.Where(x => x.id == id).FirstOrDefault();
+        //        //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
+        //        if (foodData != null)
+        //        {
+        //                returnValue.id = foodData.id;
+        //                returnValue.name =  foodData.name;
+        //                return returnValue;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
 
 

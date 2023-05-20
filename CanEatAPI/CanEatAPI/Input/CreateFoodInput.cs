@@ -1,9 +1,9 @@
 ﻿namespace CanEatAPI.Input
 {
-    public class FoodInput
+    public class CreateFoodInput
     {
-        public string? id { get; set; }
-        public string? shop_id { get; set; }
+        //public string? id { get; set; }
+        public string? shop_name { get; set; }
         public string? name { get; set; }
         public int? price { get; set; }
         public string? photo { get; set; }
