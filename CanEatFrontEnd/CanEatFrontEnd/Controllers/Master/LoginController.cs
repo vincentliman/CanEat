@@ -8,5 +8,11 @@ namespace CanEatFrontEnd.Controllers.Master
         {
             return View("Views/Master/Login/Index.cshtml");
         }
+
+        [HttpPost]
+        public IActionResult checkLogin()
+        {
+            return RedirectToAction("Index", "VendorHome");
+        }
     }
 }

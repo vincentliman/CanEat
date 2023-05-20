@@ -4,13 +4,13 @@
 @{
     Layout = "_GuestLayout";
 }
-<h1>Welcome!</h1>
-<br />
-<h2>CanEat: Online Food Ordering Service</h2>
-<br />
-<a class="btn-light" asp-area="" asp-controller="Login" asp-action="Index">
-    Login</a>
-<br />
-<a class="btn-light" asp-area="" asp-controller="RegisterCustomer" asp-action="Index">Register as Customer</a>
-<br />
-<a class="btn-light" asp-area="" asp-controller="RegisterVendor" asp-action="Index">Register as Vendor</a>
+<div class="welcome-card d-inline-flex flex-column align-items-center align-content-center border border-2 border-primary rounded p-2">
+    <h1 >Welcome!</h1>
+    <h2 >CanEat: Online Food Ordering Service</h2>
+    <form class="button-group d-inline-flex flex-column m-2">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="Login" asp-action="Index" value="Login">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="CustomerRegister" asp-action="Index" value="Register as Customer">
+        <input type="submit" class="btn-success p-2" asp-area="" asp-controller="VendorRegister" asp-action="Index" value="Register as Vendor">
+    </form>
+
+</div>

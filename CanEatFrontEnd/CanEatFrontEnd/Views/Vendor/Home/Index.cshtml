@@ -1,34 +1,59 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.VendorHomeModel;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Layout = "_VendorLayout";
 }
 
+@model VendorHomeModel
+
 <div class="restaurant-header">
     <img src="~/Assets/nebula.jpg" alt="">
-    <h1>Rocky Rooster</h1>
-    <h2>Binus University</h2>
+    <h1>@Model.vendorInfo.Name</h1>
+    <h2>@Model.vendorInfo.CompanyID</h2>
     <h2>4.5</h2>
 </div>
 
 <div class="order-day">
     <h1>04 April 2023</h1>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        @foreach (TransactionInfo tr in Model.trList)
+        {
+            @if(tr!=null){
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                        @*<div class="order-id">O001</div>
+                    <div class="order-customer">Nama: Russell WA</div>
+                    <div class="order-time"></div>*@
+                        ID: @tr.header.ID <br />
+                        Nama: @tr.customer.Name
+                    </button>
+
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        <div class="order-detail">
+                            <div class="food-name">Paket A</div>
+                            <div class="food-quantity">1</div>
+                            <div class="food-note">dkjfdfnugjneriughe</div>
+                        </div>
+                        <div class="order-detail">
+                            <div class="food-name">Paket A</div>
+                            <div class="food-quantity">Quantity: 1</div>
+                            <div class="food-note">Notes: dkjfdfnugjneriughe</div>
+                        </div>
+                        <button class="btn-primary">Selesai</button>
+                    </div>
+                </div>
+            </div>
+            }
+        }
+    </div>
     <div class="order-info">
-        <div class="order-id">O001</div>
-        <div class="order-customer">Nama: Russell WA</div>
-        <div class="order-time"></div>
-        <button class="btn-primary">Selesai</button>
-        <div class="order-detail">
-            <div class="food-name">Paket A</div>
-            <div class="food-quantity">1</div>
-            <div class="food-note">dkjfdfnugjneriughe</div>
-        </div>
-        <div class="order-detail">
-            <div class="food-name">Paket A</div>
-            <div class="food-quantity">Quantity: 1</div>
-            <div class="food-note">Notes: dkjfdfnugjneriughe</div>
-        </div>
+        
+        
     </div>
 </div>
 

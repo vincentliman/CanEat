@@ -1,0 +1,137 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+	Layout = "_AdminLayout";
+}
+<style>
+	.Register-header {
+		text-align: center;
+	}
+
+		.Register-header img {
+			width: 40%;
+		}
+
+	.Register-container {
+		background-color: #fff;
+		padding: 5rem;
+		width: 50%;
+		margin: auto;
+		border-radius: 1rem;
+		border: 1px solid #000000;
+	}
+
+		.Register-container form .input-group {
+			margin: 1rem 0;
+		}
+
+		.Register-container form input {
+			font-family: 'Inter', sans-serif;
+		}
+
+		.Register-container form label {
+			display: inline-block;
+			font-weight: 600;
+			margin-bottom: 4px;
+		}
+
+		.Register-container form input::placeholder {
+			color: #939393;
+		}
+
+		.Register-container form .input-checkbox {
+			display: flex;
+			align-items: center;
+			gap: .5rem;
+		}
+
+		.Register-container form input[type=text],
+		.Register-container form input[type=email] {
+			width: 100%;
+			padding: .5rem 1rem;
+			border: none;
+			outline: none;
+			border: 1px solid #CED0D2;
+			border-radius: .25rem;
+		}
+
+		.Register-container form input[type="checkbox"] {
+			display: block;
+		}
+
+		.Register-container form #message {
+			font-family: 'Quicksand', sans-serif;
+			padding-bottom: 5rem;
+		}
+
+	.Register-footer {
+		display: flex;
+		justify-content: center;
+		text-align: center;
+	}
+
+		.Register-footer button {
+			outline: none;
+			border: none;
+			cursor: pointer;
+		}
+
+	.registerbutton {
+		background-color: #29a329;
+		color: white;
+		padding: 15px 20px;
+		margin: 10px 0px;
+		border: none;
+		cursor: pointer;
+		width: 100%;
+	}
+
+	hr {
+		border: 1px solid black;
+		margin-bottom: 5px;
+	}
+</style>
+
+
+<div class="Register">
+	<div class="Register-container">
+		<div class="Register-header">
+			<h1>Update Your Profile</h1>
+			<p>Please fill in this form to update your profile.</p>
+		</div>
+		<hr>
+		<form action="" onsubmit="return validation()">
+			<div class="input-group">
+				<label for="name">Vendor ID</label>
+				<input type="text" name="name" id="name" placeholder="VEN01" readonly="readonly">
+			</div>
+			<div class="input-group">
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" placeholder="Your Full Name">
+			</div>
+			<div class="input-group">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" placeholder="Your Email Address">
+			</div>
+
+			<div class="input-group">
+				<label for="number">Phone Number</label>
+				<input type="text" placeholder="Your Phone Number" name="number" id="number">
+			</div>
+
+			<label for="company">Company ID</label>
+			<select class="form-select" aria-label="Default select example">
+				<option selected>Your Company ID</option>
+				<option value="1">CPY01</option>
+				<option value="2">CPY02</option>
+				<option value="3">CPY03</option>
+			</select>
+
+			<hr>
+			<div class="Register-footer">
+				<button type="submit" class="registerbutton">Update</button>
+			</div>
+		</form>
+	</div>
+</div>

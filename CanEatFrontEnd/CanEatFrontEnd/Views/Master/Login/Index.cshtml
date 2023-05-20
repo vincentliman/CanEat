@@ -5,11 +5,14 @@
     Layout = "_GuestLayout";
 }
 <h1>Login</h1>
-<form>
-    <label>Email:</label>
-    <input id="Txt-Email" type="text"/>
-    <br />
-    <label>Password:</label>
-    <input id="Txt-Password" type="text" />
-    <button id="Btn-Lqogin" class="btn-primary">Login</button>
+<form class="d-inline-flex flex-column border border-2 border-primary rounded p-2" asp-controller="Login" asp-action="checkLogin" method="post">
+    <div>
+        <label>Email:</label>
+        <input id="Txt-Email" type="text" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input id="Txt-Password" type="password" />
+    </div>
+    <input type="submit" id="Btn-Login" class="btn-primary" value="Login">
 </form>
