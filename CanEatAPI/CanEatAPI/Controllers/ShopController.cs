@@ -83,20 +83,20 @@ namespace CanEatAPI.Controllers
             }
         }
 
-        //[HttpGet("{email}, {password}")]
-        //[Produces("application/json")]
-        //public IActionResult GetShop(string email, string password)
-        //{
-        //    try
-        //    {
-        //        var objJSON = new LoginOutput();
-        //        objJSON.payload2 = shopHelper.LoginShop(email, password);
-        //        return new OkObjectResult(objJSON);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        [HttpGet("{email}, {password}")]
+        [Produces("application/json")]
+        public IActionResult GetShop(string email, string password)
+        {
+            try
+            {
+                var objJSON = new LoginOutput();
+                objJSON.payload2 = shopHelper.LoginShop(email, password);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

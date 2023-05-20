@@ -37,7 +37,7 @@ namespace CanEatAPI.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public IActionResult Post(FoodInput data)
+        public IActionResult Post(CreateFoodInput data)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace CanEatAPI.Controllers
 
         [HttpPatch]
         [Produces("application/json")]
-        public IActionResult Patch(FoodInput data)
+        public IActionResult Patch(UpdateFoodInput data)
         {
             try
             {
@@ -82,20 +82,20 @@ namespace CanEatAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        [Produces("application/json")]
-        public IActionResult GetFood(string id)
-        {
-            try
-            {
-                var objJSON = new FoodOutput2();
-                objJSON.payload4 = foodHelper.GetFood(id);
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpGet("{id}")]
+        //[Produces("application/json")]
+        //public IActionResult GetFood(string id)
+        //{
+        //    try
+        //    {
+        //        var objJSON = new FoodOutput2();
+        //        objJSON.payload4 = foodHelper.GetFood(id);
+        //        return new OkObjectResult(objJSON);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

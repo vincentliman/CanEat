@@ -217,41 +217,41 @@ namespace CanEatAPI.Helper
 
 
 
-        //public ShopData? LoginShop(string email, string password)
-        //{
-        //    var returnValue = new ShopData();
-        //    try
-        //    {
-        //        var shopData = dBContext.MsShop.Where(x => x.email == email).FirstOrDefault();
-        //        //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
-        //        if (shopData != null)
-        //        {
-        //            var pass = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
-        //            if (pass != null)
-        //            {
-        //                returnValue.id = shopData.id;
-        //                returnValue.company_id = shopData.company_id;
-        //                returnValue.name = shopData.name;
-        //                return returnValue;
+        public ShopData? LoginShop(string email, string password)
+        {
+            var returnValue = new ShopData();
+            try
+            {
+                var shopData = dBContext.MsShop.Where(x => x.email == email).FirstOrDefault();
+                //var shopData = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
+                if (shopData != null)
+                {
+                    var pass = dBContext.MsShop.Where(x => x.password == password).FirstOrDefault();
+                    if (pass != null)
+                    {
+                        returnValue.id = shopData.id.ToString();
+                        returnValue.company_id = shopData.company_id.ToString();
+                        returnValue.name = shopData.name;
+                        return returnValue;
 
-        //            }
-        //            else
-        //            {
-        //                return null;
-        //            }
+                    }
+                    else
+                    {
+                        return null;
+                    }
 
 
 
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace CanEatAPI.Helper
             try
             {
                 var customers = dBContext.MsCustomer.ToList();
+                var companies = dBContext.MsCompany.ToList();
 
                 returnValue = customers.Select(customer => new Customer()
                 {
@@ -144,8 +145,8 @@ namespace CanEatAPI.Helper
                     var pass = dBContext.MsCustomer.Where(x => x.password == password).FirstOrDefault();
                     if (pass != null)
                     {
-                        //returnValue.id = customerData.id;
-                        //returnValue.company_id = customerData.company_id;
+                        returnValue.id = customerData.id.ToString();
+                        returnValue.company_id = customerData.company_id.ToString();
                         returnValue.name = customerData.name;
                         returnValue.email = customerData.email;
                         return returnValue;
