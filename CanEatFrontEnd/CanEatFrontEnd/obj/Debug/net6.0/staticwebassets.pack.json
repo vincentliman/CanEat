@@ -5,6 +5,26 @@
       "PackagePath": "staticwebassets\\CanEatFrontEnd.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\Food\\abc-123.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Food\\abc-123.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\Food\\def-456.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Food\\def-456.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\Food\\ghi-789.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Food\\ghi-789.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\Vendor\\abc-123.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Vendor\\abc-123.jpg"
+    },
+    {
+      "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\Vendor\\def-456.jpg",
+      "PackagePath": "staticwebassets\\Assets\\Vendor\\def-456.jpg"
+    },
+    {
       "Id": "C:\\Users\\HP\\Desktop\\RMCS-SE\\CanEat\\CanEatFrontEnd\\CanEatFrontEnd\\wwwroot\\Assets\\galaxy.jpg",
       "PackagePath": "staticwebassets\\Assets\\galaxy.jpg"
     },

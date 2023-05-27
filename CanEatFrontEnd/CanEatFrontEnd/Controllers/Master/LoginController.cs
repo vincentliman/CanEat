@@ -12,7 +12,12 @@ namespace CanEatFrontEnd.Controllers.Master
         [HttpPost]
         public IActionResult checkLogin()
         {
-            return RedirectToAction("Index", "VendorHome");
+            return RedirectToAction("Index", "CustomerHome");
+        }
+
+        public IActionResult logout()
+        {
+            return View("Views/Master/LandingPage/Index.cshtml");
         }
     }
 }

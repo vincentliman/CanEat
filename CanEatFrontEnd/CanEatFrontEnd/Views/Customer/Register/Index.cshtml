@@ -1,9 +1,12 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.Register;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 	Layout = "_GuestLayout";
 }
+
+@model RegisterModel
 <style>
 		.Register-header {
 			text-align: center;
@@ -16,7 +19,7 @@
 		.Register-container {
 			background-color: #fff;
 			padding: 5rem;
-			width: 50%;
+			width: 100%;
 			margin: auto;
 			border-radius: 1rem;
 			border: 1px solid #000000;
@@ -126,9 +129,15 @@
 				<input type="text" placeholder="Repeat Your Password" name="psw-repeat" id="psw-repeat">
 			</div>
 
-			<div class="input-group">
+			<div class="d-flex flex-column">
 				<label for="company">Company</label>
-				<input type="text" placeholder="Your Company" name="company" id="company">
+				<select class="form-select" aria-label="Select company">
+					<option selected>Select company</option>
+					@foreach (Company c in Model.companyList)
+					{
+						<option value="@c.ID">@c.Name</option>
+					}
+				</select>
 			</div>
 
 			<hr>

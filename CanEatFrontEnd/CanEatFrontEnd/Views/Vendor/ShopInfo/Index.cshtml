@@ -1,59 +1,57 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.VendorShopInfo;
+@using System.IO;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Layout = "_VendorLayout";
 }
+@model VendorShopInfoModel
 
-<h1>Rocky Rooster</h1>
-<p>Fried Chicken, Rice</p>
+<h1>@Model.currVendor.Name</h1>
 
 <hr class="border border-dark border-2 opacity-50" />
 
-<h1>Paket</h1>
-<hr />
-
-<div class="shopDetail">
-    <div class="shopDetail-img">
-        <img src="~/Assets/nebula.jpg" alt="">
-    </div>
-
-    <div class="content">
-        <h2>Paket A</h2>
-        <p>1 pcs Ayam Goreng Dada / Paha Atas + 1 pcs Ayam Goreng Sayap + Nasi Putih</p>
-        <p>Ro 25.000</p>
-        <button id="delete-btn" class="btn-danger">Delete</button>
-        <button id="update-btn" class="btn-primary">Update</button>
-    </div>
+<div class="d-flex flex-row justify-content-between w-100">
+    <h1>Menu</h1>
+    <button class="btn btn-primary btn-lg rounded-pill">
+        + Add Dish
+    </button>
 </div>
+
 <hr />
 
-<div class="shopDetail">
-    <div class="shopDetail-img">
-        <img src="~/Assets/nebula.jpg" alt="">
-    </div>
 
-    <div class="content">
-        <h2>Paket B</h2>
-        <p>1 pcs Ayam Goreng Dada / Paha Atas + 1 pcs Ayam Goreng Sayap + Nasi Putih</p>
-        <p>Ro 25.000</p>
-        <button id="delete-btn" class="btn-danger">Delete</button>
-        <button id="update-btn" class="btn-primary">Update</button>
-    </div>
-</div>
-<hr />
 
-<div class="shopDetail">
-    <div class="shopDetail-img">
-        <img src="~/Assets/nebula.jpg" alt="">
-    </div>
+    @foreach (Food f in Model.foodList)
+    {
+    <div class="shopDetail">
+        <div class="shopDetail-img">
+            @{
+                var fileName = @f.Id + ".jpg";
+                var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Food\\" + fileName;
+            }
+            @if (File.Exists(path))
+            {
+                <img src="~/Assets/Food/@fileName" alt="@fileName" class="img-thumbnail" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+            }
+            else
+            {
+                <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+            }
 
-    <div class="content">
-        <h2>Paket C</h2>
-        <p>1 pcs Ayam Goreng Dada / Paha Atas + 1 pcs Ayam Goreng Sayap + Nasi Putih</p>
-        <p>Ro 25.000</p>
-        <button id="delete-btn" class="btn-danger">Delete</button>
-        <button id="update-btn" class="btn-primary">Update</button>
+        </div>
+
+        <div class="content">
+            <h2>@f.Name</h2>
+            <p>@f.Description</p>
+            <p>Rp @f.Price</p>
+            <div class="d-flex flex-row gap-2">
+                <button id="delete-btn" class="btn btn-danger btn-lg">Delete</button>
+                <button id="update-btn" class="btn btn-primary btn-lg">Update</button>
+            </div>
+
+        </div>
     </div>
-</div>
-<hr />
+    <hr />
+    }

@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Assets\" />
+    <Folder Include="wwwroot\Assets\Food\" />
+    <Folder Include="wwwroot\Assets\Vendor\" />
   </ItemGroup>
 
   <ItemGroup>

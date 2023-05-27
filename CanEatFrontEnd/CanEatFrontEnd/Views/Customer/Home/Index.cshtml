@@ -1,49 +1,72 @@
-﻿@{
+﻿@using CanEatFrontEnd.Models.PageModel.CustomerHome;
+@using System.IO;
+@{
     ViewData["Title"] = "Home Page";
     Layout = "_CustomerLayout";
 }
+
+@model CustomerHomeModel
+
+<div class="notification bg-success border-white p-3 d-flex flex-row">
+    <div class="d-flex justify-content-center flex-column ms-3 me-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-check-circle-fill text-light" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </svg>
+    </div>
+    <div>
+        <div class="notif-header display-6 text-light">
+            Order Pickup
+        </div>
+        <div class="notification-message text-light">
+            Your order at @Model.latestTrans.Vendor.Name is ready to be picked up!
+        </div>
+    </div>
+</div>
 
 <div class="special">
     <div class="special-container">
         <div class="special-header">
             <h1>Store</h1>
-            <p>All your budget freindly stores</p>
+            <p>All your budget friendly stores</p>
         </div>
-        <div class="special-content">
-            <div class="special-box">
-                <a href="#">
-                    <div class="special-thumbnail">
-                        <img src="~/Assets/nebula.jpg" alt="">
+        @if (Model.vendorList.Count > 0)
+        {
+            <div class="special-content">
+                @foreach (Vendor shop in Model.vendorList)
+                {
+                    <div class="special-box">
+                        <a asp-action="Index" asp-controller="CustomerShopDetail">
+                            <div class="special-thumbnail">
+                                @{
+                                    var fileName = @shop.Id + ".jpg";
+                                    var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Vendor\\" + fileName;
+                                }
+                                @if (File.Exists(path))
+                                {
+                                    <img src="~/Assets/Vendor/@fileName" alt="@fileName" class="img-thumbnail" style="width:30vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;>
+                                }
+                                else
+                                {
+                                    <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+                                }
+                            </div>
+                            <div class="special-title">
+                                <h5>@shop.Name</h5>
+                            </div>
+                        </a>
                     </div>
-                    <div class="special-title">
-                        <h5>Rocky Rooster</h5>
-                    </div>
-                </a>
-            </div>
-            <div class="special-box">
-                <a href="#">
-                    <div class="special-thumbnail">
-                        <img src="~/Assets/galaxy.jpg" alt="">
-                    </div>
-                    <div class="special-title">
-                        <h5>Warung</h5>
-                    </div>
-                </a>
-            </div>
-            <div class="special-box">
-                <a href="#">
-                    <div class="special-thumbnail">
-                        <img src="~/Assets/galaxy.jpg" alt="">
-                    </div>
-                    <div class="special-title">
-                        <h5>Warung</h5>
-                    </div>
-                </a>
-            </div>
+                }
 
-        </div>
+            </div>
+        }
+        else
+        {
+            <div class="fs-1">
+                No store Allocated, check back later!
+            </div>
+        }
+
         <div class="special-footer">
             <a href="" class="btn-primary">Explore More Menu</a>
         </div>
-    </div>
 </div>

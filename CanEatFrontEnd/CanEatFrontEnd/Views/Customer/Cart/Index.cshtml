@@ -1,50 +1,99 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.CustomerCart;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Layout = "_CustomerLayout";
 }
-
+@model CustomerCartModel
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 
 <div class="titleCart">
-    <i class="fa-solid fa-arrow-left fa-2x" style="padding-top:5px;padding-right:10px">     </i>
     <h2>Cart</h2>
 </div>
 
 
 <hr />
-<div class="titleCartMenu">
-    <h3>Paket A</h3>
-    <h3 style="margin-left : 30%;border: 1px solid black;border-radius: .3rem;">Rp 25.000</h3>
+@{
+    var sub = 0;
+    var total = 0;
+}
+<table class="table">
+    <thead>
+        <tr class="fw-bold">
+            <td>Food Name</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Subtotal</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (Cart c in Model.currCustomer.cartList)
+    {
+        <tr>
+            <td>
+                <h3 class="w-50">@c.Food.Name</h3>
+                <p class="w-100">@c.Notes</p>
+            </td>
+            <td>@c.Food.Price</td>
+            <td>x @c.Qty</td>
+            @{
+                sub = c.Qty * c.Food.Price;
+                total += (sub);
+            }
+            <td>Rp @sub</td>
+                <td>
+                    <button class="me-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                    </button>
+                </td>
+        </tr>
+    }
+    <tr>
+       <td colspan="4"><h3>Total</h3></td>
+       <td><h3>Rp @total</h3></td>
+    </tr>
+    </tbody>
+</table>
+<div class="payment-amount d-flex flex-row justify-content-lg-between">
+    
+</div>
+<div class="mt-lg-5">
+    <form class="d-flex flex-column align-items-center">
+        <div class="d-flex flex-row justify-content-evenly w-100">
+            <div class="w-50">
+                <h3>Schedule</h3>
+
+                <p class="text-danger">*Required</p>
+                @{
+                    var dates = DateTime.Now.Date;
+                }
+                <div class="schedule-cart d-flex flex-row gap-xl-5">
+                    <input class="input-group input-group-lg w-25" type="date" id="start" name="trip-start"
+                           value="@dates" min="@dates">
+                    <input type="time" />
+                </div>
+            </div>
+            <div class="w-50 d-flex flex-column">
+                <h3>Payment Method</h3>
+
+                <select class="form-select" aria-label="payment method">
+                    <option selected>Select Payment Method</option>
+                    <option value="gopay">GoPay</option>
+                    <option value="ovo">OVO</option>
+                    <option value="dana">Dana</option>
+                </select>
+            </div>
+
+        </div>
+        <button class="btn-primary mt-5">
+            Checkout
+        </button>
+    </form>
 </div>
 
-<p>1 pcs Ayam Goreng Dada / Paha Atas + 1 pcs Ayam Goreng Sayap + Nasi Putih</p>
-
-<hr />
-<h3>Schedule</h3>
-
-<p style="color:red">*Required</p>
-
-<div class="schedule-cart">
-    <p style="color: red; padding-right :5px">*</p>
-    <input type="date" id="start" name="trip-start"
-           value="2018-07-22"
-           min="2023-05-01" max="2023-12-31">
-</div>
-
-
-<hr />
-<h3>Payment Method</h3>
-
-<div class="payment-amount">
-    <i class="fa-solid fa-wallet" style="padding-top:5px;padding-right:10px"></i>
-    <p>Rp 25.000</p>
-</div>
-
-
-<div class="special-footer">
-    <a href="" class="btn-primary">Checkout</a>
-</div>
