@@ -14,9 +14,9 @@
 
 <div class="d-flex flex-row justify-content-between w-100">
     <h1>Menu</h1>
-    <button class="btn btn-primary btn-lg rounded-pill">
-        + Add Dish
-    </button>
+    <a class="btn btn-primary btn-lg rounded-pill" asp-action="Index" asp-controller="VendorDishInsert">
+            + Add Dish
+    </a>
 </div>
 
 <hr />
@@ -45,10 +45,10 @@
         <div class="content">
             <h2>@f.Name</h2>
             <p>@f.Description</p>
-            <p>Rp @f.Price</p>
+            <p>Rp @f.Price.ToString("#,##0")</p>
             <div class="d-flex flex-row gap-2">
-                <button id="delete-btn" class="btn btn-danger btn-lg">Delete</button>
-                <button id="update-btn" class="btn btn-primary btn-lg">Update</button>
+                <a id="delete-btn" class="btn btn-danger btn-lg">Delete</a>
+                <a id="update-btn" class="btn btn-primary btn-lg" asp-action="Index" asp-controller="VendorDishEdit">Update</a>
             </div>
 
         </div>

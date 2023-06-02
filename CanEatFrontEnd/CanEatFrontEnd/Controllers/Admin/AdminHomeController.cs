@@ -106,5 +106,24 @@ namespace CanEatFrontEnd.Controllers.Admin
 
             return View("Views/Admin/Home/Index.cshtml", model);
         }
+
+        public IActionResult deleteCompany()
+        {
+            return View();
+        }
+
+        public IActionResult deleteCustomer()
+        {
+            return View();
+        }
+
+        public IActionResult deleteVendor()
+        {
+            return View();
+        }
+        public IActionResult verifyVendor()
+        {
+            return View();
+        }
     }
 }

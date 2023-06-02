@@ -93,8 +93,8 @@
 	}
 </style>
 
-
-<div class="Register">
+<div class="d-flex flex-column justify-content-center w-100 h-100">
+<div class="Register w-100">
 	<div class="Register-container">
 		<div class="Register-header">
 			<h1>Add Company</h1>
@@ -102,14 +102,23 @@
 		</div>
 		<hr>
 		<form action="" onsubmit="return validation()">
-			<div class="input-group">
-				<label for="name">Company Name</label>
-				<input type="text" name="name" id="name" placeholder="Your Company Name">
-			</div>
+				<div class="input-group">
+					<label for="name">Company Name</label>
+					<input type="text" name="name" id="name" placeholder="Your Company Name">
+				</div>
+				<div class="input-group">
+					<label for="address">Company Address</label>
+					<input type="text" name="address" id="address" placeholder="Your Company Address">
+				</div>
+				<div class="input-group">
+					<label for="phone">Company Phone</label>
+					<input type="text" name="phone" id="name" placeholder="Your Company Phone">
+				</div>
 			<hr>
 			<div class="Register-footer">
 				<button type="submit" class="registerbutton">Add</button>
 			</div>
 		</form>
 	</div>
+</div>
 </div>

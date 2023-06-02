@@ -1,39 +1,47 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.CustomerDishDetail;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
     Layout = "_CustomerLayout";
 }
+@model CustomerDishDetailModel
+
 <div class="header">
     <img class="back-btn" src="" />
     <h3>Dish Details</h3>
 </div>
-<div class="dish-detail">
-    <img class="food-img"/>
+<div class="dish-detail d-flex flex-row gap-3 mb-4">
+    @{
+        var fileName = Model.currDish.Id+".jpg";
+     }
+    <img class="food-img img-thumbnail" src="~/Assets/Food/@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;" />
     <div class="food-info">
-        <div class="food-name"></div>
-        <div class="food-price"></div>
-        <div class="food-description"></div>
+        <div class="food-name fw-bolder fs-1">@Model.currDish.Name</div>
+        <div class="food-price fw-bold fs-3">Rp @Model.currDish.Price.ToString("#,##0")</div>
+        <div class="food-description fs-6">@Model.currDish.Description</div>
     </div>
-    <div class="quantity-info">
-        <form>
+    
+</div>
+<form class="mb-4">
+    <divm class="d-flex flex-row justify-content-between">
+        <div class="quantity-info w-25">
             <h5>Quantity</h5>
             <h6>*Required</h6>
-            <div class="btn-group">
-                <button id="minus-btn" type="button" class="btn btn-secondary">-</button>
-                <input type="number" value="0" readonly="true"/>
-                <button id="plus-btn" type="button" class="btn btn-secondary">+</button>
+            <div class="input-group mb-3 d-flex flex-row align-items-center w-50">
+                <button class="btn btn-outline-secondary" type="button">-</button>
+                <input type="text" value="0" class="quantity form-control" placeholder="Quantity" aria-label="">
+                <button class="btn btn-outline-secondary" type="button">+</button>
             </div>
-        </form>
-    </div>
-    <div class="notes-info">
-        <h5>Notes</h5>
-        <h6>optional</h6>
-        <form>
-            <input type="text" />
-        </form>
-    </div>
-    <div class="cart-btn">
-        <button id="cart-btn" type="button" class="btn btn-primary">Add to Cart</button>
-    </div>
+        </div>
+        <div class="notes-info w-75">
+            <h5>Notes</h5>
+            <h6>optional</h6>
+            <textarea class="form-control" rows="3" placeholder="Customer's notes"></textarea>
+        </div>
+</divm>
+    
+</form>
+<div class="cart-btn">
+    <button id="cart-btn" type="button" class="btn btn-primary">Add to Cart</button>
 </div>

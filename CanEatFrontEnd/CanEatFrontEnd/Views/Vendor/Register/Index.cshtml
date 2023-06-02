@@ -132,12 +132,17 @@
 			<div class="d-flex flex-column">
 				<label for="company">Company</label>
 				<select class="form-select" aria-label="Select company">
-					
+					<option selected>Select company</option>
 					@foreach (Company c in Model.companyList)
 					{
 						<option value="@c.ID">@c.Name</option>	
 					}
 				</select>
+			</div>
+
+			<div class="input-group">
+				<label for="image">Vendor image</label>
+				<input type="file" class="form-control" id="image" name="image" aria-describedby="" aria-label="">
 			</div>
 
 			<hr>

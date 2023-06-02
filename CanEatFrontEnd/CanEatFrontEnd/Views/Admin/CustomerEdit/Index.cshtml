@@ -1,9 +1,12 @@
-﻿@*
+﻿@using CanEatFrontEnd.Models.PageModel.AdminCustomerEdit;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 	Layout = "_AdminLayout";
 }
+
+@model AdminCustomerEditModel
 <style>
 	.Register-header {
 		text-align: center;
@@ -97,35 +100,42 @@
 <div class="Register">
 	<div class="Register-container">
 		<div class="Register-header">
-			<h1>Update Your Profile</h1>
-			<p>Please fill in this form to update your profile.</p>
+			<h1>Update Customer</h1>
 		</div>
 		<hr>
 		<form action="" onsubmit="return validation()">
 			<div class="input-group">
-				<label for="name">Customer ID</label>
-				<input type="text" name="name" id="name" placeholder="CUS01" readonly="readonly">
+				<label for="id">Customer ID</label>
+				<input type="text" name="id" id="id" value="@Model.currCustomer.Id" readonly="readonly">
 			</div>
 			<div class="input-group">
 				<label for="name">Name</label>
-				<input type="text" name="name" id="name" placeholder="Your Full Name">
+				<input type="text" name="name" id="name" value="@Model.currCustomer.Name" placeholder="Your Full Name">
 			</div>
 			<div class="input-group">
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" placeholder="Your Email Address">
+				<input type="email" name="email" id="email" value="@Model.currCustomer.Email" placeholder="Your Email Address">
 			</div>
 
 			<div class="input-group">
 				<label for="number">Phone Number</label>
-				<input type="text" placeholder="Your Phone Number" name="number" id="number">
+				<input type="text" placeholder="Your Phone Number" name="number" id="number" value="@Model.currCustomer.Phone">
 			</div>
 
-			<label for="company">Company ID</label>
-			<select class="form-select" aria-label="Default select example">
-				<option selected>Your Company ID</option>
-				<option value="1">CPY01</option>
-				<option value="2">CPY02</option>
-				<option value="3">CPY03</option>
+			<label for="company">Company</label>
+			<select class="form-select" aria-label="" name="company" id="company">
+				<option >Select Your Company</option>
+				@foreach(Company co in Model.companyList)
+				{
+					if(co.ID == Model.currCustomer.Company.ID)
+					{
+						<option selected value="@co.ID">@co.Name</option>
+					}
+					else
+					{
+						<option value="@co.ID">@co.Name</option>
+					}
+				}
 			</select>
 
 			<hr>

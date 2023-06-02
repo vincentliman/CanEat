@@ -31,6 +31,8 @@ namespace CanEatFrontEnd.Controllers.Customer
             v2.Name = "Fishy Chips";
 
             latestTr.Vendor.Name = "Rocky Rooster";
+            latestTr.PickupDateTime = DateTime.Now;
+            latestTr.PickupStatus = false;
             
             return View("Views/Customer/Home/Index.cshtml", model);
         }

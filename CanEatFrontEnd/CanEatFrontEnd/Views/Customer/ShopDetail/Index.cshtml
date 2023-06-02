@@ -22,29 +22,31 @@
 
 @foreach (Food f in Model.foodList)
 {
-    <div class="shopDetail">
-        <div class="shopDetail-img">
-            @{
-                var fileName = @f.Id + ".jpg";
-                var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Food\\" + fileName;
-            }
-            @if (File.Exists(path))
-            {
-                <img src="~/Assets/Food/@fileName" alt="@fileName" class="img-thumbnail" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
-            }
-            else
-            {
-                <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
-            }
+    <a asp-action="Index" asp-controller="CustomerDishDetail" class="text-decoration-none text-dark">
+        <div class="shopDetail">
+            <div class="shopDetail-img">
+                @{
+                    var fileName = @f.Id + ".jpg";
+                    var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Food\\" + fileName;
+                }
+                @if (File.Exists(path))
+                {
+                    <img src="~/Assets/Food/@fileName" alt="@fileName" class="img-thumbnail" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+                }
+                else
+                {
+                    <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+                }
 
+            </div>
+
+            <div class="content">
+                <h2>@f.Name</h2>
+                <p>@f.Description</p>
+                <p>Rp @f.Price.ToString("#,##0")</p>
+
+            </div>
         </div>
-
-        <div class="content">
-            <h2>@f.Name</h2>
-            <p>@f.Description</p>
-            <p>Rp @f.Price</p>
-
-        </div>
-    </div>
+    </a>
     <hr />
 }

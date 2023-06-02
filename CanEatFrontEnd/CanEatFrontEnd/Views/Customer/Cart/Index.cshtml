@@ -38,13 +38,13 @@
                 <h3 class="w-50">@c.Food.Name</h3>
                 <p class="w-100">@c.Notes</p>
             </td>
-            <td>@c.Food.Price</td>
+                <td>@c.Food.Price.ToString("#,##0")</td>
             <td>x @c.Qty</td>
             @{
                 sub = c.Qty * c.Food.Price;
                 total += (sub);
             }
-            <td>Rp @sub</td>
+                <td>Rp @sub.ToString("#,##0")</td>
                 <td>
                     <button class="me-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -56,7 +56,7 @@
     }
     <tr>
        <td colspan="4"><h3>Total</h3></td>
-       <td><h3>Rp @total</h3></td>
+       <td><h3>Rp @total.ToString("#,##0")</h3></td>
     </tr>
     </tbody>
 </table>
