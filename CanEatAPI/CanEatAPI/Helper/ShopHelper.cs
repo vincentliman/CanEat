@@ -61,6 +61,7 @@ namespace CanEatAPI.Helper
                     email = shop.email,
                     password = shop.password,
                     phone = shop.phone,
+                    status = shop.status,
                     
                 }).ToList();
                 return returnValue;
@@ -120,6 +121,53 @@ namespace CanEatAPI.Helper
 
                 returnValue.statusCode = 200;
                 returnValue.message = "shop updated";
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public StatusOutput UpdateShopStatus(UpdateShopStatusInput data)
+        {
+            var returnValue = new StatusOutput();
+
+            try
+            {
+                var shop = dBContext.MsShop.Where(x => x.name.Equals(data.name)).FirstOrDefault();
+                var company = dBContext.MsCompany.Where(x => x.name.Equals(data.company_name)).FirstOrDefault();
+
+                if (shop == null)
+                {
+                    returnValue.statusCode = 404;
+                    returnValue.message = "shop not found";
+                    return returnValue;
+                }
+
+                if (company == null)
+                {
+                    returnValue.statusCode = 404;
+                    returnValue.message = "company not found";
+                    return returnValue;
+                }
+
+                if (data.name != null)
+                {
+                    shop.name = data.name;
+                }
+
+                if (data.status == false)
+                {
+                    shop.status = (bool)data.status;
+                }
+
+
+                dBContext.MsShop.Update(shop);
+                dBContext.SaveChanges();
+
+                returnValue.statusCode = 200;
+                returnValue.message = "shop status updated";
                 return returnValue;
             }
             catch (Exception ex)
@@ -190,9 +238,10 @@ namespace CanEatAPI.Helper
                         id = Guid.NewGuid(),
                         company_id = company.id,
                         name = data.name,
-                        email= data.email,
+                        email = data.email,
                         password = data.password,
                         phone = data.phone,
+                        status = false,
                     };
 
                     dBContext.MsShop.Add(shop);
