@@ -127,13 +127,13 @@
 				<option >Select Your Company</option>
 				@foreach(Company co in Model.companyList)
 				{
-					if(co.ID == Model.currCustomer.Company.ID)
+					if(co.Id == Model.currCustomer.Company.Id)
 					{
-						<option selected value="@co.ID">@co.Name</option>
+						<option selected value="@co.Id">@co.Name</option>
 					}
 					else
 					{
-						<option value="@co.ID">@co.Name</option>
+						<option value="@co.Id">@co.Name</option>
 					}
 				}
 			</select>

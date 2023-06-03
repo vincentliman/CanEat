@@ -11,7 +11,7 @@ namespace CanEatFrontEnd.Controllers.Admin
 			Models.Company co1 = new Models.Company();
 			model.currCompany = co1;
 
-			co1.ID = "abc-452";
+			co1.Id = "abc-452";
 			co1.Name = "Bina Nusantara University";
 			co1.Address = "Jl. Alam Sutera 12 Tangerang";
 			co1.Phone = "345678919201";

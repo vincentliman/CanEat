@@ -19,17 +19,17 @@ namespace CanEatFrontEnd.Controllers.Admin
 			model.companyList.Add(co3);
 			model.currVendor = v1;
 
-            co1.ID = "abc-452";
+            co1.Id = "abc-452";
             co1.Name = "Bina Nusantara University";
             co1.Address = "Jl. Alam Sutera 12 Tangerang";
             co1.Phone = "345678919201";
 
-            co2.ID = "dsf-123";
+            co2.Id = "dsf-123";
             co2.Name = "Media Nusantara University";
             co2.Address = "Jl. Gading Raya 22 Tangerang";
             co2.Phone = "123451234523";
 
-            co3.ID = "iue-251";
+            co3.Id = "iue-251";
             co3.Name = "PT Jaya Nusantara";
             co3.Address = "Jl. Lalala 120 Jakarta Pusat";
             co3.Phone = "890890890123";
