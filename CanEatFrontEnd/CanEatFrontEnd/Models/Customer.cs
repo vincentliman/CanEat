@@ -1,6 +1,8 @@
 ﻿using CanEatFrontEnd.Models.DBModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text.Json.Nodes;
 
 namespace CanEatFrontEnd.Models
 {
@@ -41,10 +43,16 @@ namespace CanEatFrontEnd.Models
 				using (var response = await client.GetAsync("https://localhost:7082/api/Customer"))
 				{
 					string apiResult = await response.Content.ReadAsStringAsync();
-					_CustomerList = JsonConvert.DeserializeObject<List<MsCustomerModel>>(apiResult);
-				}
-			}
+                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, List<MsCustomerModel>>>(apiResult);
+                    var users = data["payload"];
+                    foreach (var i in users)
+					{
+						_CustomerList.Add(i);
+					}
 
+                }
+			}
 			foreach (MsCustomerModel c in _CustomerList)
 			{
 				Customer cus = new Customer();
@@ -53,7 +61,7 @@ namespace CanEatFrontEnd.Models
 				cus.Email = c.email;
 				cus.Phone = c.phone;
 				cus.Password = c.password;
-				cus.Company = await Company.getCompany(c.company_id.ToString());
+				//cus.Company = await Company.getCompany(c.company_id.ToString());
 				//cus.cartList = ;
 				customerList.Add(cus);
 			}

@@ -36,8 +36,13 @@ namespace CanEatFrontEnd.Models
 				using (var response = await client.GetAsync("https://localhost:7082/api/Company"))
 				{
 					string apiResult = await response.Content.ReadAsStringAsync();
-					_CompanyList = JsonConvert.DeserializeObject<List<MsCompanyModel>>(apiResult);
-				}
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, List<MsCompanyModel>>>(apiResult);
+                    var company = data["payload"];
+                    foreach (var i in company)
+                    {
+                        _CompanyList.Add(i);
+                    }
+                }
 			}
 
 			foreach (MsCompanyModel c in _CompanyList)
@@ -64,8 +69,10 @@ namespace CanEatFrontEnd.Models
 				using (var response = await client.GetAsync("https://localhost:7082/api/Company/" + Id))
 				{
 					string apiResult = await response.Content.ReadAsStringAsync();
-					_Company = JsonConvert.DeserializeObject<MsCompanyModel>(apiResult);
-				}
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsCompanyModel>>(apiResult);
+                    var company = data["payload"];
+					_Company = company;
+                }
 			}
 			
 			co.Id = _Company.id.ToString();

@@ -10,7 +10,7 @@ namespace CanEatFrontEnd.Controllers.Admin
     public class AdminHomeController : Controller
     {
         
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             AdminHomeModel model = new AdminHomeModel();
             Models.Vendor v1 = new Models.Vendor();
@@ -107,6 +107,12 @@ namespace CanEatFrontEnd.Controllers.Admin
             cu3.Phone = "081277772212";
             cu3.Password = "MangMaman1290";
             cu3.Company = co3;
+
+            model.customerList = await Models.Customer.getAllCustomer();
+            model.companyList = await Models.Company.getAllCompany();
+            model.vendorList = await Models.Vendor.getAllVendor();
+            model.verifyList = await Models.Vendor.getUnverified();
+
 
             return View("Views/Admin/Home/Index.cshtml", model);
         }

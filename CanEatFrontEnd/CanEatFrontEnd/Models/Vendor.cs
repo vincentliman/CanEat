@@ -18,28 +18,41 @@ namespace CanEatFrontEnd.Models
             Company = new Company();
         }
 
-        private static HttpClientHandler _clientHandler = new HttpClientHandler();
+        private static HttpClientHandler _clientHandler;
 
-        private static void connect()
+        private static HttpClientHandler connect()
         {
-            _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
-                , chain, SslPolicyErrors) => { return true; };
+                _clientHandler = new HttpClientHandler();
+                _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
+                    , chain, SslPolicyErrors) => { return true; };
+            return _clientHandler;
         }
 
+        public static async Task<List<Vendor>> getUnverified()
+        {
+
+            List<Vendor> listVendor = await getAllVendor();
+            listVendor = listVendor.Where(vendor => vendor.Status == false).ToList();
+            return listVendor;
+        }
 
         [HttpGet]
         public static async Task<List<Vendor>> getAllVendor()
         {
             List<MsShopModel> _ShopList = new List<MsShopModel>();
             List<Vendor> vendorList = new List<Vendor>();
-
-            connect();
-            using (var client = new HttpClient(_clientHandler))
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
             {
                 using (var response = await client.GetAsync("https://localhost:7082/api/Shop"))
                 {
                     string apiResult = await response.Content.ReadAsStringAsync();
-                    _ShopList = JsonConvert.DeserializeObject<List<MsShopModel>>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, List<MsShopModel>>>(apiResult);
+                    var shops = data["payload"];
+                    foreach (var i in shops)
+                    {
+                        _ShopList.Add(i);
+                    }
                 }
             }
 
@@ -51,8 +64,8 @@ namespace CanEatFrontEnd.Models
                 v.Name = s.name;
                 v.Phone = s.phone;
                 v.Password = s.password;
-                v.Company = await Company.getCompany(s.company_id.ToString());
-                //v.Status = s. //TODO: add Status to DB Model
+                //v.Company = await Company.getCompany(s.company_id.ToString());
+                v.Status = s.status;
                 vendorList.Add(v);
             }
             return vendorList;
