@@ -22,23 +22,25 @@ namespace CanEatFrontEnd.Models
             cartList = new List<Cart>();
 		}
 
-		private static HttpClientHandler _clientHandler = new HttpClientHandler();
+        private static HttpClientHandler _clientHandler;
 
-		private static void connect()
-		{
-			_clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
-				, chain, SslPolicyErrors) => { return true; };
-		}
+        private static HttpClientHandler connect()
+        {
+            _clientHandler = new HttpClientHandler();
+            _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
+                , chain, SslPolicyErrors) => { return true; };
+            return _clientHandler;
+        }
 
 
-		[HttpGet]
+        [HttpGet]
 		public static async Task<List<Customer>> getAllCustomer()
 		{
 			List<MsCustomerModel> _CustomerList = new List<MsCustomerModel>();
 			List<Customer> customerList = new List<Customer>();
 
-			connect();
-			using (var client = new HttpClient(_clientHandler))
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
 			{
 				using (var response = await client.GetAsync("https://localhost:7082/api/Customer"))
 				{
@@ -61,8 +63,7 @@ namespace CanEatFrontEnd.Models
 				cus.Email = c.email;
 				cus.Phone = c.phone;
 				cus.Password = c.password;
-				//cus.Company = await Company.getCompany(c.company_id.ToString());
-				//cus.cartList = ;
+				cus.Company = await Company.getCompany(c.company_id.ToString());
 				customerList.Add(cus);
 			}
 			return customerList;
@@ -71,26 +72,40 @@ namespace CanEatFrontEnd.Models
 		[HttpGet]
 		public static async Task<Customer> getCustomer(string id)
 		{
-			MsCustomerModel _Customer = new MsCustomerModel();
-			Customer cus = new Customer();
+			//MsCustomerModel _Customer = new MsCustomerModel();
+			//Customer cus = new Customer();
 
-			connect();
-			using (var client = new HttpClient(_clientHandler))
-			{
-				using (var response = await client.GetAsync("https://localhost:7082/api/Customer/" + id))
-				{
-					string apiResult = await response.Content.ReadAsStringAsync();
-					_Customer = JsonConvert.DeserializeObject<MsCustomerModel>(apiResult);
-				}
-			}
-			cus.Id = _Customer.id.ToString();
-			cus.Name = _Customer.name;
-			cus.Email = _Customer.email;
-			cus.Phone = _Customer.phone;
-			cus.Password = _Customer.password;
-			//cus.Company = ;
-			//cus.cartList = ;
+			//         using (var handler = connect())
+			//         using (var client = new HttpClient(handler))
+			//{
+			//	using (var response = await client.GetAsync("https://localhost:7082/api/Customer/" + id))
+			//	{
+			//		string apiResult = await response.Content.ReadAsStringAsync();
+			//		_Customer = JsonConvert.DeserializeObject<MsCustomerModel>(apiResult);
+			//	}
+			//}
+			//cus.Id = _Customer.id.ToString();
+			//cus.Name = _Customer.name;
+			//cus.Email = _Customer.email;
+			//cus.Phone = _Customer.phone;
+			//cus.Password = _Customer.password;
+			//         cus.Company = await Company.getCompany(_Customer.company_id.ToString());
+			List<Customer> listCustomer = await getAllCustomer();
+			Customer cus = listCustomer.Where(customer => customer.Id == id).FirstOrDefault();
 			return cus;
+		}
+
+		[HttpPatch]
+		public static async Task<String> editCustomer()
+		{
+
+			return "";
+		}
+
+		[HttpDelete]
+		public static async Task<String> deleteCustomer(string id)
+		{
+			return "";
 		}
 	}
 }

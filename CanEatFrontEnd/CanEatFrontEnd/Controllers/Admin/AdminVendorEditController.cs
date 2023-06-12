@@ -6,9 +6,12 @@ namespace CanEatFrontEnd.Controllers.Admin
 {
     public class AdminVendorEditController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string id)
         {
             AdminVendorEditModel model = new AdminVendorEditModel();
+            model.companyList = await Models.Company.getAllCompany();
+            model.currVendor = await Models.Vendor.getVendor(id);
+
 			Company co1 = new Company();
 			Company co2 = new Company();
 			Company co3 = new Company();

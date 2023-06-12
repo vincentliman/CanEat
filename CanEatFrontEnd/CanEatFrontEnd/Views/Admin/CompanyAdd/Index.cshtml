@@ -101,7 +101,7 @@
 			<p>Please fill in this form to add your company.</p>
 		</div>
 		<hr>
-		<form action="" onsubmit="return validation()">
+		<form asp-action="AddCompany" asp-controller="AdminCompanyAdd" onsubmit="return validation()">
 				<div class="input-group">
 					<label for="name">Company Name</label>
 					<input type="text" name="name" id="name" placeholder="Your Company Name">
@@ -112,7 +112,7 @@
 				</div>
 				<div class="input-group">
 					<label for="phone">Company Phone</label>
-					<input type="text" name="phone" id="name" placeholder="Your Company Phone">
+					<input type="text" name="phone" id="phone" placeholder="Your Company Phone">
 				</div>
 			<hr>
 			<div class="Register-footer">

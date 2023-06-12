@@ -33,6 +33,9 @@ namespace CanEatFrontEnd.Models
 
             List<Vendor> listVendor = await getAllVendor();
             listVendor = listVendor.Where(vendor => vendor.Status == false).ToList();
+            if(listVendor.Count <= 0) {
+                listVendor = new List<Vendor>();
+            }
             return listVendor;
         }
 
@@ -64,7 +67,7 @@ namespace CanEatFrontEnd.Models
                 v.Name = s.name;
                 v.Phone = s.phone;
                 v.Password = s.password;
-                //v.Company = await Company.getCompany(s.company_id.ToString());
+                v.Company = await Company.getCompany(s.company_id.ToString());
                 v.Status = s.status;
                 vendorList.Add(v);
             }
@@ -72,30 +75,43 @@ namespace CanEatFrontEnd.Models
         }
 
         [HttpGet]
-        public static async Task<Vendor> getVendor(string Id)
+        public static async Task<Vendor> getVendor(string id)
         {
-            MsShopModel _Shop = new MsShopModel();
-            Vendor v = new Vendor();
+			//MsShopModel _Shop = new MsShopModel();
+			//Vendor v = new Vendor();
 
-            connect();
-            using (var client = new HttpClient(_clientHandler))
-            {
-                using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + Id))
-                {
-                    string apiResult = await response.Content.ReadAsStringAsync();
-                    _Shop = JsonConvert.DeserializeObject<MsShopModel>(apiResult);
-                }
-            }
+			//using (var handler = connect())
+			//using (var client = new HttpClient(handler))
+			//{
+			//    using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + Id))
+			//    {
+			//        string apiResult = await response.Content.ReadAsStringAsync();
+			//        _Shop = JsonConvert.DeserializeObject<MsShopModel>(apiResult);
+			//    }
+			//}
 
-            v.Id = _Shop.id.ToString();
-            v.Email = _Shop.email;
-            v.Name = _Shop.name;
-            v.Phone = _Shop.phone;
-            v.Password = _Shop.password;
-            v.Company = await Company.getCompany(_Shop.company_id.ToString());
-            //v.Status = s. //TODO: add Status to DB Model
+			//v.Id = _Shop.id.ToString();
+			//v.Email = _Shop.email;
+			//v.Name = _Shop.name;
+			//v.Phone = _Shop.phone;
+			//v.Password = _Shop.password;
+			//v.Company = await Company.getCompany(_Shop.company_id.ToString());
+			//v.Status = _Shop.status;
+			List<Vendor> listVendor = await getAllVendor();
+			Vendor v = listVendor.Where(v => v.Id == id).FirstOrDefault();
 
-            return v;
+			return v;
+        }
+
+        [HttpDelete]
+        public static async Task<string> deleteVendor(string id)
+        {
+            return "";
+        }
+        [HttpPatch]
+        public static async Task<string> editVendor()
+        {
+            return "";
         }
     }
 }

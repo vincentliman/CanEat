@@ -113,13 +113,13 @@ namespace CanEatFrontEnd.Controllers.Admin
             model.vendorList = await Models.Vendor.getAllVendor();
             model.verifyList = await Models.Vendor.getUnverified();
 
-
             return View("Views/Admin/Home/Index.cshtml", model);
         }
 
-        public IActionResult deleteCompany()
+        public async Task<IActionResult> deleteCompany(String id)
         {
-            return View();
+            await Models.Company.deleteCompany(id);
+            return RedirectToAction("Index", "AdminHome");
         }
 
         public IActionResult deleteCustomer()
