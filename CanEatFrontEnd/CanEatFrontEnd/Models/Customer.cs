@@ -95,6 +95,33 @@ namespace CanEatFrontEnd.Models
 			return cus;
 		}
 
+		[HttpGet]
+		public static async Task<String> login(string email, string pass)
+		{
+			String id = "";
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
+            {
+                using (var response = await client.GetAsync("https://localhost:7082/api/Customer/"+email + ", " + pass))
+                {
+                    string apiResult = await response.Content.ReadAsStringAsync();
+                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsCustomerModel>>(apiResult);
+                    var user = data["payload3"];
+					if(user != null)
+					{
+						id = user.id.ToString();
+					}
+					else
+					{
+						id = null;
+					}
+					
+                }
+            }
+			return id;
+        }
+
 		[HttpPatch]
 		public static async Task<String> editCustomer()
 		{

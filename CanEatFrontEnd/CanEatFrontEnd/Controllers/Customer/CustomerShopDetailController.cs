@@ -7,7 +7,7 @@ namespace CanEatFrontEnd.Controllers.Customer
 {
     public class CustomerShopDetailController : Controller
     {
-        public async IActionResult Index(string vendorId)
+        public async Task<IActionResult> Index(string vendorId)
         {
             CustomerShopDetailModel model = new CustomerShopDetailModel();
             //Models.Vendor v1 = new Models.Vendor();

@@ -28,6 +28,17 @@ namespace CanEatFrontEnd.Models
             return _clientHandler;
         }
 
+        public static async Task<List<Vendor>> getVendorCompany(string companyId)
+        {
+            List<Vendor> listVendor = await getAllVendor();
+            listVendor = listVendor.Where(vendor => vendor.Company.Id == companyId).ToList();
+            if (listVendor.Count <= 0)
+            {
+                listVendor = new List<Vendor>();
+            }
+            return listVendor;
+        }
+
         public static async Task<List<Vendor>> getUnverified()
         {
 
@@ -101,6 +112,32 @@ namespace CanEatFrontEnd.Models
 			Vendor v = listVendor.Where(v => v.Id == id).FirstOrDefault();
 
 			return v;
+        }
+
+        [HttpGet]
+        public static async Task<String> login(string email, string pass)
+        {
+            String id = "";
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
+            {
+                using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + email + ", " + pass))
+                {
+                    string apiResult = await response.Content.ReadAsStringAsync();
+                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsShopModel>>(apiResult);
+                    var user = data["payload2"];
+                    if (user != null)
+                    {
+                        id = user.id.ToString();
+                    }
+                    else
+                    {
+                        id = null;
+                    }
+                }
+            }
+            return id;
         }
 
         [HttpDelete]

@@ -5,14 +5,17 @@
     Layout = "_GuestLayout";
 }
 <h1>Login</h1>
-<form class="d-inline-flex flex-column border border-2 border-primary rounded p-2" asp-controller="Login" asp-action="checkLogin" method="post">
+<form class="d-inline-flex flex-column border border-2 border-primary rounded p-2" asp-controller="Login" asp-action="checkLogin" onsubmit="return validation()">
     <div class="d-flex justify-content-between align-items-center">
         <label class="m-2">Email:</label>
-        <input id="Txt-Email" type="text" class="m-2" />
+        <input id="email" name="email" type="text" class="m-2" />
     </div>
     <div class="d-flex justify-content-between align-items-center">
         <label class="m-2">Password:</label>
-        <input id="Txt-Password" type="password" class="m-2" />
+        <input id="password" name="password" type="password" class="m-2" />
+    </div>
+    <div class="text-danger" id="error">
+        @TempData["error"]
     </div>
     <input type="submit" id="Btn-Login" class="btn-primary" value="Login">
 </form>

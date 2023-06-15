@@ -60,7 +60,7 @@ else
                 @foreach (Vendor shop in Model.vendorList)
                 {
                     <div class="special-box">
-                        <a asp-action="Index" asp-controller="CustomerShopDetail">
+                        <a asp-action="Index" asp-controller="CustomerShopDetail" >
                             <div class="special-thumbnail">
                                 @{
                                     var fileName = @shop.Id + ".jpg";
@@ -68,11 +68,11 @@ else
                                 }
                                 @if (File.Exists(path))
                                 {
-                                    <img src="~/Assets/Vendor/@fileName" alt="@fileName" class="img-thumbnail" style="width:30vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;>
+                                    <img src="~/Assets/Vendor/@fileName" alt="@fileName" class="img-thumbnail" style="width:30vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
                                 }
                                 else
                                 {
-                                    <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
+                                    <img src ="~/Assets/nebula.jpg" alt="@fileName" class="img-thumbnail" style="width:30vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
                                 }
                             </div>
                             <div class="special-title">
