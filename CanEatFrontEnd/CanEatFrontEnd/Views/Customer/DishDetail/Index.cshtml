@@ -29,9 +29,9 @@
             <h5>Quantity</h5>
             <h6>*Required</h6>
             <div class="input-group mb-3 d-flex flex-row align-items-center w-50">
-                <button class="btn btn-outline-secondary" type="button">-</button>
-                <input type="text" value="0" class="quantity form-control" placeholder="Quantity" aria-label="">
-                <button class="btn btn-outline-secondary" type="button">+</button>
+                <button class="btn btn-outline-secondary" id="minus-button" type="button">-</button>
+                <input type="text" value="0" id="qty" class="quantity form-control" placeholder="Quantity" aria-label="">
+                <button class="btn btn-outline-secondary" id="plus-button" type="button">+</button>
             </div>
         </div>
         <div class="notes-info w-75">
@@ -45,3 +45,28 @@
 <div class="cart-btn">
     <button id="cart-btn" type="button" class="btn btn-primary">Add to Cart</button>
 </div>
+
+<script>
+    const minusButton = document.getElementById("minus-button");
+    const qtyInput = document.getElementById("qty");
+    const plusButton = document.getElementById("plus-button");
+
+    function decrementQty() {
+        let currentValue = parseInt(qtyInput.value);
+
+        if (currentValue > 0) {
+            currentValue--;
+        }
+        qtyInput.value = currentValue;
+    }
+
+    function incrementQty() {
+        let currentValue = parseInt(qtyInput.value);
+
+        currentValue++;
+        qtyInput.value = currentValue;
+    }
+
+    minusButton.addEventListener("click", decrementQty);
+    plusButton.addEventListener("click", incrementQty);
+</script>

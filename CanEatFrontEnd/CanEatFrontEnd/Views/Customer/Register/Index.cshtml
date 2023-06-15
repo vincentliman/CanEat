@@ -135,7 +135,7 @@
 					<option selected>Select company</option>
 					@foreach (Company c in Model.companyList)
 					{
-						<option value="@c.Id">@c.Name</option>
+						<option value="@c.Name">@c.Name</option>
 					}
 				</select>
 			</div>
@@ -152,7 +152,7 @@
 				<button type="submit" class="registerbutton">Register</button>
 			</div>
 
-			<p>Already have an account? <a href="#">Sign in</a>.</p>
+			<p>Already have an account? <a asp-action="Index" asp-controller="Login">Sign in</a>.</p>
 		</form>
 	</div>
 </div>

@@ -103,7 +103,7 @@
 			<p>Please fill in this form to update your company detail.</p>
 		</div>
 		<hr>
-		<form action="" onsubmit="return validation()">
+		<form asp-action="EditCompany" asp-controller="AdminCompanyEdit" onsubmit="return validation()">
 			<div class="input-group">
 				<label for="id">Company ID</label>
 				<input type="text" name="id" id="id" value="@Model.currCompany.Id" readonly="readonly">
@@ -118,7 +118,7 @@
 			</div>
 			<div class="input-group">
 				<label for="phone">Company Phone</label>
-				<input type="text" name="phone" id="name" value="@Model.currCompany.Phone" placeholder="Your Company Phone">
+				<input type="text" name="phone" id="phone" value="@Model.currCompany.Phone" placeholder="Your Company Phone">
 			</div>
 			<hr>
 			<div class="Register-footer">

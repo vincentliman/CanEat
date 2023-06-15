@@ -18,28 +18,55 @@ namespace CanEatFrontEnd.Models
             Company = new Company();
         }
 
-        private static HttpClientHandler _clientHandler = new HttpClientHandler();
+        private static HttpClientHandler _clientHandler;
 
-        private static void connect()
+        private static HttpClientHandler connect()
         {
-            _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
-                , chain, SslPolicyErrors) => { return true; };
+                _clientHandler = new HttpClientHandler();
+                _clientHandler.ServerCertificateCustomValidationCallback = (sender, cert
+                    , chain, SslPolicyErrors) => { return true; };
+            return _clientHandler;
         }
 
+        public static async Task<List<Vendor>> getVendorCompany(string companyId)
+        {
+            List<Vendor> listVendor = await getAllVendor();
+            listVendor = listVendor.Where(vendor => vendor.Company.Id == companyId).ToList();
+            if (listVendor.Count <= 0)
+            {
+                listVendor = new List<Vendor>();
+            }
+            return listVendor;
+        }
+
+        public static async Task<List<Vendor>> getUnverified()
+        {
+
+            List<Vendor> listVendor = await getAllVendor();
+            listVendor = listVendor.Where(vendor => vendor.Status == false).ToList();
+            if(listVendor.Count <= 0) {
+                listVendor = new List<Vendor>();
+            }
+            return listVendor;
+        }
 
         [HttpGet]
         public static async Task<List<Vendor>> getAllVendor()
         {
             List<MsShopModel> _ShopList = new List<MsShopModel>();
             List<Vendor> vendorList = new List<Vendor>();
-
-            connect();
-            using (var client = new HttpClient(_clientHandler))
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
             {
                 using (var response = await client.GetAsync("https://localhost:7082/api/Shop"))
                 {
                     string apiResult = await response.Content.ReadAsStringAsync();
-                    _ShopList = JsonConvert.DeserializeObject<List<MsShopModel>>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, List<MsShopModel>>>(apiResult);
+                    var shops = data["payload"];
+                    foreach (var i in shops)
+                    {
+                        _ShopList.Add(i);
+                    }
                 }
             }
 
@@ -52,37 +79,76 @@ namespace CanEatFrontEnd.Models
                 v.Phone = s.phone;
                 v.Password = s.password;
                 v.Company = await Company.getCompany(s.company_id.ToString());
-                //v.Status = s. //TODO: add Status to DB Model
+                v.Status = s.status;
                 vendorList.Add(v);
             }
             return vendorList;
         }
 
         [HttpGet]
-        public static async Task<Vendor> getVendor(string Id)
+        public static async Task<Vendor> getVendor(string id)
         {
-            MsShopModel _Shop = new MsShopModel();
-            Vendor v = new Vendor();
+			//MsShopModel _Shop = new MsShopModel();
+			//Vendor v = new Vendor();
 
-            connect();
-            using (var client = new HttpClient(_clientHandler))
+			//using (var handler = connect())
+			//using (var client = new HttpClient(handler))
+			//{
+			//    using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + Id))
+			//    {
+			//        string apiResult = await response.Content.ReadAsStringAsync();
+			//        _Shop = JsonConvert.DeserializeObject<MsShopModel>(apiResult);
+			//    }
+			//}
+
+			//v.Id = _Shop.id.ToString();
+			//v.Email = _Shop.email;
+			//v.Name = _Shop.name;
+			//v.Phone = _Shop.phone;
+			//v.Password = _Shop.password;
+			//v.Company = await Company.getCompany(_Shop.company_id.ToString());
+			//v.Status = _Shop.status;
+			List<Vendor> listVendor = await getAllVendor();
+			Vendor v = listVendor.Where(v => v.Id == id).FirstOrDefault();
+
+			return v;
+        }
+
+        [HttpGet]
+        public static async Task<String> login(string email, string pass)
+        {
+            String id = "";
+            using (var handler = connect())
+            using (var client = new HttpClient(handler))
             {
-                using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + Id))
+                using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + email + ", " + pass))
                 {
                     string apiResult = await response.Content.ReadAsStringAsync();
-                    _Shop = JsonConvert.DeserializeObject<MsShopModel>(apiResult);
+                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsShopModel>>(apiResult);
+                    var user = data["payload2"];
+                    if (user != null)
+                    {
+                        id = user.id.ToString();
+                    }
+                    else
+                    {
+                        id = null;
+                    }
                 }
             }
+            return id;
+        }
 
-            v.Id = _Shop.id.ToString();
-            v.Email = _Shop.email;
-            v.Name = _Shop.name;
-            v.Phone = _Shop.phone;
-            v.Password = _Shop.password;
-            v.Company = await Company.getCompany(_Shop.company_id.ToString());
-            //v.Status = s. //TODO: add Status to DB Model
-
-            return v;
+        [HttpDelete]
+        public static async Task<string> deleteVendor(string id)
+        {
+            return "";
+        }
+        [HttpPatch]
+        public static async Task<string> editVendor()
+        {
+            return "";
         }
     }
 }
