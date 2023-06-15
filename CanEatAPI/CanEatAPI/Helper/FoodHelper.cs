@@ -100,6 +100,38 @@ namespace CanEatAPI.Helper
             }
         }
 
+        public FoodDataById? GetFoodData(string id)
+        {
+            var returnValue = new FoodDataById();
+            try
+            {
+                Guid foodId = Guid.Parse(id);
+                var foodData = dBContext.MsFood.ToList().FirstOrDefault(x => foodId == x.id);
+                if (foodData != null)
+                {
+                    //var companyData = dBContext.MsCompany.Where(x => x.id == customerData.company_id).FirstOrDefault();
+                    //var religionData = dBContext.MsReligion.Where(x => x.id == studentData.religionId).FirstOrDefault();
+
+                    //returnValue.student = student;
+                    returnValue.name = foodData.name;
+                    returnValue.price = foodData.price;
+                    returnValue.photo = foodData.photo;
+                    returnValue.description = foodData.description;
+
+
+                    return returnValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public List<Food> GetAllFoods()
         {

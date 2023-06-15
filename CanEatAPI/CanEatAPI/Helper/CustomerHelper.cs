@@ -1,6 +1,9 @@
 ﻿using CanEatAPI.Input;
 using CanEatAPI.Models;
 using CanEatAPI.Output;
+using System.Diagnostics;
+using System.Drawing;
+using System.Reflection;
 
 namespace CanEatAPI.Helper
 {
@@ -34,6 +37,127 @@ namespace CanEatAPI.Helper
                     phone = customer.phone,
                 }).ToList();
                 return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public StatusOutput UpdateCustomer(UpdateCustomerInput data)
+        {
+            var returnValue = new StatusOutput();
+
+            try
+            {
+                var customer = dBContext.MsCustomer.Where(x => x.id == data.id).FirstOrDefault();
+                var company = dBContext.MsCompany.Where(x => x.name.Equals(data.company_name)).FirstOrDefault();
+
+                if (customer == null)
+                {
+                    returnValue.statusCode = 404;
+                    returnValue.message = "customer not found";
+                    return returnValue;
+                }
+
+                if (company == null)
+                {
+                    returnValue.statusCode = 404;
+                    returnValue.message = "company not found";
+                    return returnValue;
+                }
+
+                if (data.company_name != null)
+                {
+                    customer.company_id = company.id;
+                }
+
+                if (data.name != null)
+                {
+                    customer.name = data.name;
+                }
+
+                if (data.email != null)
+                {
+                    customer.email = data.email;
+                }
+
+                if (data.password != null)
+                {
+                    customer.password = data.password;
+                }
+
+                if (data.phone != null)
+                {
+                    customer.phone = data.phone;
+                }
+
+
+                dBContext.MsCustomer.Update(customer);
+                dBContext.SaveChanges();
+
+                returnValue.statusCode = 200;
+                returnValue.message = "customer updated";
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public StatusOutput DeleteCustomer(string id)
+        {
+            var returnValue = new StatusOutput();
+
+            try
+            {
+                Guid customerId = Guid.Parse(id);
+                var customer = dBContext.MsCustomer.Where(x => customerId == x.id).FirstOrDefault();
+                if (customer == null)
+                {
+                    returnValue.statusCode = 404;
+                    returnValue.message = "food not found";
+                    return returnValue;
+                }
+
+                dBContext.MsCustomer.Remove(customer);
+                dBContext.SaveChanges();
+
+                returnValue.statusCode = 200;
+                returnValue.message = "customer deleted";
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public CustomerDataById? GetCustomerData(string id)
+        {
+            var returnValue = new CustomerDataById();
+            try
+            {
+                Guid customerId = Guid.Parse(id);
+                var customerData = dBContext.MsCustomer.ToList().FirstOrDefault(x=>customerId == x.id);
+                if (customerData != null)
+                {
+                    //var companyData = dBContext.MsCompany.Where(x => x.id == customerData.company_id).FirstOrDefault();
+                    //var religionData = dBContext.MsReligion.Where(x => x.id == studentData.religionId).FirstOrDefault();
+
+                    //returnValue.student = student;
+                    returnValue.name = customerData.name;
+                    returnValue.email = customerData.email;
+                    returnValue.phone = customerData.phone;
+
+
+                    return returnValue;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {

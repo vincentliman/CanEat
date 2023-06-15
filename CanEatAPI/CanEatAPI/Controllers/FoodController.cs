@@ -35,6 +35,22 @@ namespace CanEatAPI.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [Produces("application/json")]
+        public IActionResult Get(string id)
+        {
+            try
+            {
+                var objJSON = new GetFoodByIdOutput();
+                objJSON.payload = foodHelper.GetFoodData(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Produces("application/json")]
         public IActionResult Post(CreateFoodInput data)

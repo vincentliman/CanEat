@@ -176,6 +176,38 @@ namespace CanEatAPI.Helper
             }
         }
 
+        public ShopDataById? GetShopData(string id)
+        {
+            var returnValue = new ShopDataById();
+            try
+            {
+                Guid shopId = Guid.Parse(id);
+                var shopData = dBContext.MsShop.ToList().FirstOrDefault(x => shopId == x.id);
+                if (shopData != null)
+                {
+                    //var companyData = dBContext.MsCompany.Where(x => x.id == customerData.company_id).FirstOrDefault();
+                    //var religionData = dBContext.MsReligion.Where(x => x.id == studentData.religionId).FirstOrDefault();
+
+                    //returnValue.student = student;
+                    returnValue.name = shopData.name;
+                    returnValue.email = shopData.email;
+                    returnValue.phone = shopData.phone;
+                    returnValue.status = shopData.status;
+
+
+                    return returnValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
 
 

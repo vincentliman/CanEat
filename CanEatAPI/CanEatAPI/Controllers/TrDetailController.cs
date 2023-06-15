@@ -1,45 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using CanEatAPI.Helper;
-using CanEatAPI.Output;
+﻿using CanEatAPI.Helper;
 using CanEatAPI.Input;
+using CanEatAPI.Output;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CanEatAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CompanyController : ControllerBase
+    public class TrDetailController : ControllerBase
     {
-        public CompanyHelper companyHelper;
-        public CompanyController(CompanyHelper companyHelper)
+        public TrDetailHelper trdetailHelper;
+        public TrDetailController(TrDetailHelper trdetailHelper)
         {
-            this.companyHelper = companyHelper;
+            this.trdetailHelper = trdetailHelper;
         }
 
         [HttpGet]
         [Produces("application/json")]
-
         public IActionResult Get()
         {
             try
             {
-                var objJSON = new CompanyOutput();
-                objJSON.payload = companyHelper.GetAllCompanies();
-                return new OkObjectResult(objJSON);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost]
-        [Produces("application/json")]
-        public IActionResult Post(CreateCompanyInput data)
-        {
-            try
-            {
-                var objJSON = companyHelper.CreateCompany(data);
+                var objJSON = new TrDetailOutput();
+                objJSON.payload = trdetailHelper.GetAllTrDetail();
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
@@ -54,7 +39,7 @@ namespace CanEatAPI.Controllers
         {
             try
             {
-                var objJSON = companyHelper.DeleteCompany(id);
+                var objJSON = trdetailHelper.DeleteTrDetail(id);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
@@ -62,15 +47,14 @@ namespace CanEatAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
 
         [HttpPatch]
         [Produces("application/json")]
-        public IActionResult Patch(UpdateCompanyInput data)
+        public IActionResult Patch(UpdateTrDetailInput data)
         {
             try
             {
-                var objJSON = companyHelper.UpdateCompany(data);
+                var objJSON = trdetailHelper.UpdateTrDetail(data);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
@@ -79,14 +63,13 @@ namespace CanEatAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpPost]
         [Produces("application/json")]
-        public IActionResult Get(string id)
+        public IActionResult Post(CreateTrDetailInput data)
         {
             try
             {
-                var objJSON = new GetCompanyByIdOutput();
-                objJSON.payload = companyHelper.GetCompanyData(id);
+                var objJSON = trdetailHelper.CreateTrDetail(data);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
