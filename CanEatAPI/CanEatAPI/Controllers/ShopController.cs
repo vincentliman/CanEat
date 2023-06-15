@@ -34,6 +34,22 @@ namespace CanEatAPI.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        [Produces("application/json")]
+        public IActionResult Get(string id)
+        {
+            try
+            {
+                var objJSON = new GetShopByIdOutput();
+                objJSON.payload = shopHelper.GetShopData(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpGet]
         [Produces("application/json")]

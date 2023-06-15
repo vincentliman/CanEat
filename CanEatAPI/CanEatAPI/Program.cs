@@ -19,6 +19,9 @@ builder.Services.AddScoped<CompanyHelper>();
 builder.Services.AddScoped<FoodHelper>();
 builder.Services.AddScoped<ShopHelper>();
 builder.Services.AddScoped<CustomerHelper>();
+builder.Services.AddScoped<TrHeaderHelper>();
+builder.Services.AddScoped<TrDetailHelper>();
+builder.Services.AddScoped<CartHelper>();
 
 
 var app = builder.Build();

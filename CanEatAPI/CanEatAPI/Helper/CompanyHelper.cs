@@ -110,6 +110,37 @@ namespace CanEatAPI.Helper
             }
         }
 
+        public CompanyDataById? GetCompanyData(string id)
+        {
+            var returnValue = new CompanyDataById();
+            try
+            {
+                Guid companyId = Guid.Parse(id);
+                var companyData = dBContext.MsCompany.ToList().FirstOrDefault(x => companyId == x.id);
+                if (companyData != null)
+                {
+                    //var companyData = dBContext.MsCompany.Where(x => x.id == customerData.company_id).FirstOrDefault();
+                    //var religionData = dBContext.MsReligion.Where(x => x.id == studentData.religionId).FirstOrDefault();
+
+                    //returnValue.student = student;
+                    returnValue.name = companyData.name;
+                    returnValue.address = companyData.address;
+                    returnValue.phone = companyData.phone;
+
+
+                    return returnValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
 
         public StatusOutput CreateCompany(CreateCompanyInput? data)

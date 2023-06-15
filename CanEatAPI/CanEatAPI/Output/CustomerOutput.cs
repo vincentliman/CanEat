@@ -1,4 +1,7 @@
-﻿namespace CanEatAPI.Output
+﻿using System.Drawing;
+using System.Reflection;
+
+namespace CanEatAPI.Output
 {
     public class CustomerOutput
     {
@@ -20,4 +23,6 @@
         public string password { get; set; }
         public string phone { get; set; }
     }
+
+
 }

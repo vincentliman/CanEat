@@ -36,6 +36,21 @@ namespace CanEatAPI.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        [Produces("application/json")]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                var objJSON = customerHelper.DeleteCustomer(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
 
         [HttpPost]
         [Produces("application/json")]
@@ -61,6 +76,37 @@ namespace CanEatAPI.Controllers
             {
                 var objJSON = new LoginCustOutput();
                 objJSON.payload3 = customerHelper.LoginCustomer(email, password);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}")]
+        [Produces("application/json")]
+        public IActionResult Get(string id)
+        {
+            try
+            {
+                var objJSON = new GetCustomerByIdOutput();
+                objJSON.payload = customerHelper.GetCustomerData(id);
+                return new OkObjectResult(objJSON);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch]
+        [Produces("application/json")]
+        public IActionResult Patch(UpdateCustomerInput data)
+        {
+            try
+            {
+                var objJSON = customerHelper.UpdateCustomer(data);
                 return new OkObjectResult(objJSON);
             }
             catch (Exception ex)
