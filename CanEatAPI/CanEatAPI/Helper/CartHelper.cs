@@ -59,12 +59,12 @@ namespace CanEatAPI.Helper
                     return returnValue;
                 }
 
-                if (food == null)
-                {
-                    returnValue.statusCode = 404;
-                    returnValue.message = "food not found";
-                    return returnValue;
-                }
+                //if (food == null)
+                //{
+                //    returnValue.statusCode = 404;
+                //    returnValue.message = "food not found";
+                //    return returnValue;
+                //}
 
 
                 if (data.qty != null)
