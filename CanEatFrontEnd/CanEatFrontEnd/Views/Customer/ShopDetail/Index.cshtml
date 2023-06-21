@@ -22,7 +22,7 @@
 
 @foreach (Food f in Model.foodList)
 {
-    <a asp-action="Index" asp-controller="CustomerDishDetail" class="text-decoration-none text-dark">
+    <a asp-action="Index" asp-controller="CustomerDishDetail" asp-route-id="@f.Id" class="text-decoration-none text-dark">
         <div class="shopDetail">
             <div class="shopDetail-img">
                 @{
@@ -37,7 +37,6 @@
                 {
                     <img src="~/Assets/nebula.jpg" alt="@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;">
                 }
-
             </div>
 
             <div class="content">

@@ -25,7 +25,7 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var food = dBContext.MsFood.Where(x => x.name.Equals(data.food_name)).FirstOrDefault();
+                    var food = dBContext.MsFood.Where(x => x.id.ToString().Equals(data.food_id)).FirstOrDefault();
                     //var customer = dBContext.MsCustomer.Where(x => x.name.Equals(data.customer_name)).FirstOrDefault();
                     var trheader = dBContext.TrHeader.Where(x => x.tr_id == data.tr_id).FirstOrDefault();
 

@@ -47,8 +47,8 @@
             <p>@f.Description</p>
             <p>Rp @f.Price.ToString("#,##0")</p>
             <div class="d-flex flex-row gap-2">
-                <a id="delete-btn" class="btn btn-danger btn-lg">Delete</a>
-                <a id="update-btn" class="btn btn-primary btn-lg" asp-action="Index" asp-controller="VendorDishEdit">Update</a>
+                <a id="delete-btn" class="btn btn-danger btn-lg" asp-action="deleteDish" asp-controller="VendorShopInfo" asp-route-id="@f.Id">Delete</a>
+                <a id="update-btn" class="btn btn-primary btn-lg" asp-action="Index" asp-controller="VendorDishEdit" asp-route-id="@f.Id">Update</a>
             </div>
 
         </div>

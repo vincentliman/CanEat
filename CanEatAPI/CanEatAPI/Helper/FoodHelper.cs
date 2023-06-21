@@ -22,7 +22,7 @@ namespace CanEatAPI.Helper
             try
             {
                 var food = dBContext.MsFood.Where(x => x.id==data.id).FirstOrDefault();
-                var shop = dBContext.MsShop.Where(x => x.name.Equals(data.shop_name)).FirstOrDefault();
+                var shop = dBContext.MsShop.Where(x => x.id.ToString().Equals(data.shop_id)).FirstOrDefault();
 
                 if (shop == null)
                 {
@@ -167,7 +167,7 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var shop = dBContext.MsShop.Where(x => x.name.Equals(data.shop_name)).FirstOrDefault();
+                    var shop = dBContext.MsShop.Where(x => x.id.ToString().Equals(data.shop_id)).FirstOrDefault();
                     
 
                     if (shop == null)

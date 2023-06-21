@@ -5,7 +5,7 @@ namespace CanEatFrontEnd.Models.DBModel
     public class TrHeaderModel
     {
         [Key]
-        public string id { get; set; }
+        public string tr_id { get; set; }
         public string shop_id { get; set; }
 
         public string customer_id { get; set; }

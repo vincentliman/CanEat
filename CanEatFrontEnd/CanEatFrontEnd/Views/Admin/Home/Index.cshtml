@@ -39,7 +39,7 @@
                                     <td>@count.</td>
                                     <td>@v.Id</td>
                                     <td>@v.Name</td>
-                                    <td><a asp-action="" asp-controller="" class="btn btn-primary">Approve</a></td>
+                                    <td><a asp-action="verifyVendor" asp-controller="AdminHome" asp-route-id="@v.Id" class="btn btn-primary">Approve</a></td>
                                 </tr>
                                 {
                                     count += 1;

@@ -100,14 +100,14 @@
 			<h1>Add Dish</h1>
 		</div>
 		<hr>
-		<form action="" onsubmit="return validation()">
+		<form asp-action="insertDish" asp-controller="VendorDishInsert" onsubmit="return validation()">
 			<div class="input-group">
 				<label for="name">Dish Name</label>
 				<input type="text" name="name" id="name" placeholder="Dish Name">
 			</div>
 			<div class="input-group d-flex flex-column w-100">
 				<label for="desc">Dish Description</label>
-				<textarea class="form-control" rows="2" placeholder="Dish Description"></textarea>
+				<textarea name="desc" class="form-control" rows="2" placeholder="Dish Description"></textarea>
 			</div>
 
 			<div class="input-group">

@@ -1,4 +1,5 @@
 ﻿using CanEatFrontEnd.Models;
+using CanEatFrontEnd.Models.OtherDBModel;
 using CanEatFrontEnd.Models.PageModel.AdminCustomerEdit;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,9 +47,17 @@ namespace CanEatFrontEnd.Controllers.Admin
 			return View("Views/Admin/CustomerEdit/Index.cshtml", model);
 		}
 
-		public async Task<IActionResult> editCustomer()
+		public async Task<IActionResult> editCustomer(String id)
 		{
-
+			Models.Customer c = await Models.Customer.getCustomer(id);
+			CustomerEditModel model = new CustomerEditModel();
+			model.id = id;
+			model.name = Request.Form["name"];
+			model.email = Request.Form["email"];
+			model.phone = Request.Form["number"];
+			model.password = c.Password;
+			model.company_name = Request.Form["company"];
+			await Models.Customer.editCustomer(model);
 			return RedirectToAction("Index", "AdminHome");
 		}
 	}

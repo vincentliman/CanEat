@@ -1,4 +1,5 @@
 ﻿using CanEatFrontEnd.Models;
+using CanEatFrontEnd.Models.OtherDBModel;
 using CanEatFrontEnd.Models.PageModel.VendorHomeModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
@@ -8,8 +9,8 @@ namespace CanEatFrontEnd.Controllers.Vendor
 {
     public class VendorHomeController : Controller
     {
-        public IActionResult Index()
-        {            
+        public async Task<IActionResult> Index()
+        {
             TrHeader t1 = new TrHeader();
             t1.ID = "asdas-asdasd-1212";
             t1.TransactionDateTime = DateTime.Now;
@@ -47,8 +48,22 @@ namespace CanEatFrontEnd.Controllers.Vendor
             model.trList.Add(t1);
             model.trList.Add(t2);
             model.vendorInfo = v1;
-            
+
+            string id = HttpContext.Session.GetString("Id");
+            model.vendorInfo = await Models.Vendor.getVendor(id);
+            model.trList = await TrHeader.getHeaderVendor(id);
             return View("Views/Vendor/Home/Index.cshtml", model);
+        }
+
+        public async Task<IActionResult> finishOrder(string trId)
+        {
+            TrHeader t1 = await TrHeader.getHeader(trId);
+            HeaderEditModel model = new HeaderEditModel();
+            model.tr_id = trId;
+            model.pickUpStatus = true;
+            model.paymentStatus = true;
+            string result = await Models.TrHeader.editHeader(model);
+            return RedirectToAction("Index", "VendorHome");
         }
     }
 }

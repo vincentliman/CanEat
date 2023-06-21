@@ -21,10 +21,12 @@ namespace CanEatFrontEnd.Controllers.Master
             string vendorId = await Models.Vendor.login(email, password);
             if(customerId != null)
             {
+                HttpContext.Session.SetString("Id", customerId);
                 return RedirectToAction("Index", "CustomerHome", new { CustomerId = customerId });
             }else if(vendorId != null)
             {
-                return RedirectToAction("Index", "VendorHome", new { VendorId = customerId });
+                HttpContext.Session.SetString("Id", vendorId);
+                return RedirectToAction("Index", "VendorHome", new { VendorId = vendorId });
             }
             else
             {

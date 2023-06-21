@@ -67,11 +67,6 @@ namespace CanEatAPI.Helper
                     trheader.pickUpStatus = (Boolean)data.pickUpStatus.Value;
                 }
 
-                if (data.pickUpDateTime != DateTime.MinValue)
-                {
-                    trheader.pickUpDateTime = data.pickUpDateTime;
-                }
-
                 dBContext.TrHeader.Update(trheader);
                 dBContext.SaveChanges();
 
@@ -123,8 +118,8 @@ namespace CanEatAPI.Helper
             {
                 if (data != null)
                 {
-                    var shop = dBContext.MsShop.Where(x => x.name.Equals(data.shop_name)).FirstOrDefault();
-                    var customer = dBContext.MsCustomer.Where(x => x.name.Equals(data.customer_name)).FirstOrDefault();
+                    var shop = dBContext.MsShop.Where(x => x.id.ToString().Equals(data.shop_id)).FirstOrDefault();
+                    var customer = dBContext.MsCustomer.Where(x => x.id.ToString().Equals(data.customer_id)).FirstOrDefault();
 
 
                     if (shop == null)
@@ -192,7 +187,7 @@ namespace CanEatAPI.Helper
                     dBContext.SaveChanges();
 
                     returnValue.statusCode = 201;
-                    returnValue.message = "transactrion created";
+                    returnValue.message = trheader.tr_id.ToString();
                     return returnValue;
                 }
                 else

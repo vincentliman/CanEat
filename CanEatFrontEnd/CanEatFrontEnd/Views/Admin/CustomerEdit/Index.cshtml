@@ -103,7 +103,7 @@
 			<h1>Update Customer</h1>
 		</div>
 		<hr>
-		<form action="" onsubmit="return validation()">
+		<form asp-controller="AdminCustomerEdit" asp-action="editCustomer" asp-route-id="@Model.currCustomer.Id" onsubmit="return validation()">
 			<div class="input-group">
 				<label for="id">Customer ID</label>
 				<input type="text" name="id" id="id" value="@Model.currCustomer.Id" readonly="readonly">
@@ -123,7 +123,7 @@
 			</div>
 
 			<label for="company">Company</label>
-			<select class="form-select" aria-label="" name="company" id="company">
+			<select name="company" class="form-select" aria-label="" name="company" id="company">
 				<option >Select Your Company</option>
 				@foreach(Company co in Model.companyList)
 				{

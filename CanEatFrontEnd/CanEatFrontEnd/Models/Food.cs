@@ -1,6 +1,8 @@
 ﻿using CanEatFrontEnd.Models.DBModel;
+using CanEatFrontEnd.Models.OtherDBModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace CanEatFrontEnd.Models
 {
@@ -58,8 +60,7 @@ namespace CanEatFrontEnd.Models
                 fo.Name = f.name;
                 fo.Price = f.price;
                 fo.Description = f.description;
-                //TODO: Vendor
-                
+                fo.Vendor = await Vendor.getVendor(f.shop_id.ToString());
                 foodList.Add(fo);
             }
             return foodList;
@@ -96,5 +97,55 @@ namespace CanEatFrontEnd.Models
             listFood = listFood.Where(fo => fo.Vendor.Id == id).ToList();
             return listFood;
         }
+
+        public static async Task<string> deleteFood(string id) 
+        {
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				using (var response = await client.DeleteAsync("https://localhost:7082/api/Food/" + id))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
+
+        [HttpPost]
+        public static async Task<String> addFood(FoodAddModel model)
+        {
+			string result = "";
+
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+				using (var response = await client.PostAsync("https://localhost:7082/api/Food", content))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
+
+        [HttpPatch]
+        public static async Task<string> editFood(FoodEditModel model)
+        {
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+				using (var response = await client.PatchAsync("https://localhost:7082/api/Food", content))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
     }
 }

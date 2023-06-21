@@ -49,8 +49,9 @@ namespace CanEatAPI.Helper
             try
             {
                 //var customer = dBContext.MsCustomer.Where(x => x.id == data.customer_id).FirstOrDefault();
+                
                 var cart = dBContext.MsCart.Where(x => x.customer_id == data.customer_id).FirstOrDefault();
-                var food = dBContext.MsFood.Where(x => x.name.Equals(data.food_name)).FirstOrDefault();
+                var food = dBContext.MsFood.Where(x => x.id.ToString().Equals(data.food_id)).FirstOrDefault();
 
                 if (cart == null)
                 {
@@ -130,8 +131,8 @@ namespace CanEatAPI.Helper
                 if (data != null)
                 {
                     
-                    var food = dBContext.MsFood.Where(x => x.name.Equals(data.food_name)).FirstOrDefault();
-                    var customer = dBContext.MsCustomer.Where(x => x.name.Equals(data.customer_name)).FirstOrDefault();
+                    var food = dBContext.MsFood.Where(x => x.id.ToString().Equals(data.food_id)).FirstOrDefault();
+                    var customer = dBContext.MsCustomer.Where(x =>x.id.ToString().Equals(data.customer_id)).FirstOrDefault();
 
 
                     if (food == null)
@@ -162,7 +163,7 @@ namespace CanEatAPI.Helper
                     var cart = new MsCart
                     {
                         customer_id = customer.id,
-                        food_id = food.id,
+                        food_id = Guid.Parse(data.food_id),
                         qty =  data.qty.Value,
                         notes =  data.notes,
 

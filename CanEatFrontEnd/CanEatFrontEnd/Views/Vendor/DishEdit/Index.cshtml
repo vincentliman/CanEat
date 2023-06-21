@@ -102,7 +102,7 @@
 			<h1>Edit Dish</h1>
 		</div>
 		<hr>
-		<form action="" onsubmit="return validation()">
+		<form asp-action="editDish" asp-controller="VendorDishEdit" onsubmit="return validation()">
 			<div class="input-group">
 				<label for="id">Dish ID</label>
 				<input type="text" name="id" id="id" placeholder="Dish ID" value="@Model.currFood.Id" readonly="readonly">
@@ -113,7 +113,7 @@
 			</div>
 			<div class="input-group d-flex flex-column w-100">
 				<label for="desc">Dish Description</label>
-				<textarea class="form-control" rows="2" placeholder="Dish Description">@Model.currFood.Description</textarea>
+				<textarea name="desc" class="form-control" rows="2" placeholder="Dish Description">@Model.currFood.Description</textarea>
 			</div>
 
 			<div class="input-group">

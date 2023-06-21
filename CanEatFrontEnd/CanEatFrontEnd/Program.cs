@@ -3,7 +3,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+
+
+builder.Services.AddDistributedMemoryCache(); // or use a distributed cache provider like Redis
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "UserId";
+    options.IdleTimeout = TimeSpan.FromMinutes(60); // Adjust the timeout according to your needs
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

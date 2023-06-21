@@ -1,6 +1,7 @@
 ﻿using CanEatFrontEnd.Models.PageModel.Register;
 using CanEatFrontEnd.Models;
 using Microsoft.AspNetCore.Mvc;
+using CanEatFrontEnd.Models.OtherDBModel;
 
 namespace CanEatFrontEnd.Controllers.Vendor
 {
@@ -36,9 +37,16 @@ namespace CanEatFrontEnd.Controllers.Vendor
 			return View("Views/Vendor/Register/Index.cshtml", model);
 		}
 
-		public IActionResult register()
+		public async Task<IActionResult> register()
 		{
-			return View("Views/Master/Login/Index.cshtml");
+			VendorRegisterModel model = new VendorRegisterModel();
+			model.name = Request.Form["name"];
+            model.email = Request.Form["email"];
+			model.phone = Request.Form["number"];
+			model.password = Request.Form["psw"];
+			model.company_name = Request.Form["company"];
+			await Models.Vendor.vendorRegister(model);
+            return View("Views/Master/Login/Index.cshtml");
 		}
 	}
 }

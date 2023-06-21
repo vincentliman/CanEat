@@ -19,28 +19,33 @@
     <tr>
         <div class="fs-3">Order Detail</div>
     </tr>
-    @foreach (TrDetail tr in Model.currTrans.detailList)
+    @if(Model.currTrans.detailList.Count > 0)
     {
-        
+        @foreach (TrDetail tr in Model.currTrans.detailList)
+        {
+
+            <tr>
+                <td>
+                    <h3 class="w-50">@tr.Food.Name</h3>
+                    <p class="w-100">@tr.Food.Description</p>
+                </td>
+                <td>@tr.Food.Price.ToString("#,##0")</td>
+                <td>x @tr.Qty</td>
+                @{
+                    sub = tr.Qty * tr.Food.Price;
+                    total += (sub);
+                }
+                <td>Rp @sub.ToString("#,##0")</td>
+            </tr>
+        }
         <tr>
-            <td>
-                <h3 class="w-50">@tr.Food.Name</h3>
-                <p class="w-100">@tr.Food.Description</p>
-            </td>
-            <td>@tr.Food.Price.ToString("#,##0")</td>
-            <td>x @tr.Qty</td>
-            @{
-                sub = tr.Qty * tr.Food.Price;
-                total += (sub);
-            }
-            <td>Rp @sub.ToString("#,##0")</td>
+            <td colspan="3"><div class="fs-3">Total</div></td>
+            <td>Rp @total.ToString("#,##0")</td>
+
         </tr>
     }
-    <tr>
-        <td colspan="3"><div class="fs-3">Total</div></td>
-        <td>Rp @total.ToString("#,##0")</td>
-
-    </tr>
+    
+    
 </table>
 <div class="back-home-btn d-flex justify-content-center">
     <a type="button" class="btn-primary" asp-action="Index" asp-controller="CustomerHome">Home</a>

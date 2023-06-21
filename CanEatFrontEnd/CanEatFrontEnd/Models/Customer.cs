@@ -1,7 +1,9 @@
 ﻿using CanEatFrontEnd.Models.DBModel;
+using CanEatFrontEnd.Models.OtherDBModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace CanEatFrontEnd.Models
@@ -14,12 +16,10 @@ namespace CanEatFrontEnd.Models
         public string Phone { get; set; }
         public string Password { get; set; }
         public Company Company { get; set; }
-        public List<Cart> cartList { get; set; }
 
         public Customer()
         {
             Company = new Company();
-            cartList = new List<Cart>();
 		}
 
         private static HttpClientHandler _clientHandler;
@@ -98,41 +98,83 @@ namespace CanEatFrontEnd.Models
 		[HttpGet]
 		public static async Task<String> login(string email, string pass)
 		{
-			String id = "";
-            using (var handler = connect())
-            using (var client = new HttpClient(handler))
-            {
-                using (var response = await client.GetAsync("https://localhost:7082/api/Customer/"+email + ", " + pass))
-                {
-                    string apiResult = await response.Content.ReadAsStringAsync();
-                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
-                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsCustomerModel>>(apiResult);
-                    var user = data["payload3"];
-					if(user != null)
-					{
-						id = user.id.ToString();
-					}
-					else
-					{
-						id = null;
-					}
-					
-                }
-            }
-			return id;
+            //String id = "";
+            //         using (var handler = connect())
+            //         using (var client = new HttpClient(handler))
+            //         {
+            //             using (var response = await client.GetAsync("https://localhost:7082/api/Customer/"+email + ", " + pass))
+            //             {
+            //                 string apiResult = await response.Content.ReadAsStringAsync();
+            //                 //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+            //                 var data = JsonConvert.DeserializeObject<Dictionary<string, MsCustomerModel>>(apiResult);
+            //                 var user = data["payload3"];
+            //		if(user != null)
+            //		{
+            //			id = user.id.ToString();
+            //		}
+            //		else
+            //		{
+            //			id = null;
+            //		}
+
+            //             }
+            //         }
+            //return id;
+            List<Customer> listCustomer = await getAllCustomer();
+            Customer cus = listCustomer.Where(customer => customer.Email == email && customer.Password == pass).FirstOrDefault();
+			if (cus != null) return cus.Id.ToString();
+			else return null;
         }
 
 		[HttpPatch]
-		public static async Task<String> editCustomer()
+		public static async Task<String> editCustomer(CustomerEditModel model)
 		{
-
-			return "";
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+				using (var response = await client.PatchAsync("https://localhost:7082/api/Customer", content))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
 		}
 
 		[HttpDelete]
 		public static async Task<String> deleteCustomer(string id)
 		{
-			return "";
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				using (var response = await client.DeleteAsync("https://localhost:7082/api/Customer/" + id))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
+
+		[HttpPost]
+		public static async Task<String> customerRegister(CustomerRegisterModel model)
+		{
+			string result = "";
+
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+				using (var response = await client.PostAsync("https://localhost:7082/api/Customer", content))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
 		}
 	}
 }

@@ -1,6 +1,9 @@
 ﻿using CanEatFrontEnd.Models.DBModel;
+using CanEatFrontEnd.Models.OtherDBModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
+using System.Text;
 
 namespace CanEatFrontEnd.Models
 {
@@ -117,38 +120,82 @@ namespace CanEatFrontEnd.Models
         [HttpGet]
         public static async Task<String> login(string email, string pass)
         {
-            String id = "";
+            //String id = "";
+            //using (var handler = connect())
+            //using (var client = new HttpClient(handler))
+            //{
+            //    using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + email + ", " + pass))
+            //    {
+            //        string apiResult = await response.Content.ReadAsStringAsync();
+            //        //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
+            //        var data = JsonConvert.DeserializeObject<Dictionary<string, MsShopModel>>(apiResult);
+            //        var user = data["payload2"];
+            //        if (user != null)
+            //        {
+            //            id = user.id.ToString();
+            //        }
+            //        else
+            //        {
+            //            id = null;
+            //        }
+            //    }
+            //}
+            //return id;
+            List<Vendor> listVendor = await getAllVendor();
+            Vendor v = listVendor.Where(v => v.Email == email && v.Password == pass && v.Status == true).FirstOrDefault();
+
+            if (v != null) return v.Id;
+            else return null;
+        }
+
+        [HttpPost]
+        public static async Task<string> vendorRegister(VendorRegisterModel model)
+        {
+            string result = "";
+
             using (var handler = connect())
             using (var client = new HttpClient(handler))
             {
-                using (var response = await client.GetAsync("https://localhost:7082/api/Shop/" + email + ", " + pass))
+                StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                using (var response = await client.PostAsync("https://localhost:7082/api/Shop", content))
                 {
                     string apiResult = await response.Content.ReadAsStringAsync();
-                    //_CustomerList = JsonConvert.DeserializeObject<JsonArray>(apiResult);
-                    var data = JsonConvert.DeserializeObject<Dictionary<string, MsShopModel>>(apiResult);
-                    var user = data["payload2"];
-                    if (user != null)
-                    {
-                        id = user.id.ToString();
-                    }
-                    else
-                    {
-                        id = null;
-                    }
+                    result = JsonConvert.DeserializeObject(apiResult).ToString();
                 }
             }
-            return id;
+            return result;
         }
 
         [HttpDelete]
         public static async Task<string> deleteVendor(string id)
         {
-            return "";
-        }
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				using (var response = await client.DeleteAsync("https://localhost:7082/api/Shop/" + id))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
         [HttpPatch]
-        public static async Task<string> editVendor()
+        public static async Task<string> editVendor(VendorEditModel model)
         {
-            return "";
-        }
+			string result = "";
+			using (var handler = connect())
+			using (var client = new HttpClient(handler))
+			{
+				StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+				using (var response = await client.PatchAsync("https://localhost:7082/api/Shop", content))
+				{
+					string apiResult = await response.Content.ReadAsStringAsync();
+					result = JsonConvert.DeserializeObject(apiResult).ToString();
+				}
+			}
+			return result;
+		}
     }
 }

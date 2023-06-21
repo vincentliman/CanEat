@@ -1,7 +1,9 @@
 ﻿using CanEatFrontEnd.Models;
+using CanEatFrontEnd.Models.OtherDBModel;
 using CanEatFrontEnd.Models.PageModel.Register;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using System.Reflection;
 
 namespace CanEatFrontEnd.Controllers.Customer
 {
@@ -36,8 +38,15 @@ namespace CanEatFrontEnd.Controllers.Customer
             return View("Views/Customer/Register/Index.cshtml", model);
 		}
 
-		public IActionResult register()
+		public async Task<IActionResult> register()
 		{
+            CustomerRegisterModel model = new CustomerRegisterModel();
+			model.name = Request.Form["name"];
+			model.email = Request.Form["email"];
+			model.phone = Request.Form["number"];
+			model.password = Request.Form["psw"];
+			model.company_name = Request.Form["company"];
+            await Models.Customer.customerRegister(model);
 			return View("Views/Master/Login/Index.cshtml");
 		}
 	}

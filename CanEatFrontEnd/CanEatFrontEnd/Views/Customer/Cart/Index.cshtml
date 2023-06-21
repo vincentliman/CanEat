@@ -31,9 +31,14 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (Cart c in Model.currCustomer.cartList)
+        @{
+            int count = 0;
+        }
+    @foreach (Cart c in Model.carts)
     {
-        <tr>
+            @if(c.Qty > 0)
+            {
+            <tr>
             <td>
                 <h3 class="w-50">@c.Food.Name</h3>
                 <p class="w-100">@c.Notes</p>
@@ -46,25 +51,30 @@
             }
                 <td>Rp @sub.ToString("#,##0")</td>
                 <td>
-                    <button class="me-3">
+                    <a class="btn me-3" asp-action="deleteItem" asp-controller="CustomerCart" asp-route-foodId="@c.Food.Id">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
                         </svg>
-                    </button>
+                    </a>
                 </td>
-        </tr>
+            </tr>
+            count++;
+            }
     }
-    <tr>
-       <td colspan="4"><h3>Total</h3></td>
-       <td><h3>Rp @total.ToString("#,##0")</h3></td>
-    </tr>
+        @if(count == 0)
+        {
+            <tr><h1>No Items in Cart yet</h1></tr>
+        }
+        <tr>
+            <td colspan="4"><h3>Total</h3></td>
+            <td><h3>Rp @total.ToString("#,##0")</h3></td>
+        </tr>
     </tbody>
 </table>
-<div class="payment-amount d-flex flex-row justify-content-lg-between">
-    
-</div>
+@if(count > 0)
+{
 <div class="mt-lg-5">
-    <form class="d-flex flex-column align-items-center">
+        <form class="d-flex flex-column align-items-center" asp-action="checkOut" asp-controller="CustomerCart" onsubmit="return validation()">
         <div class="d-flex flex-row justify-content-evenly w-100">
             <div class="w-50">
                 <h3>Schedule</h3>
@@ -74,15 +84,15 @@
                     var dates = DateTime.Now.Date;
                 }
                 <div class="schedule-cart d-flex flex-row gap-xl-5">
-                    <input class="input-group input-group-lg w-25" type="date" id="start" name="trip-start"
+                    <input name="pickup_date" class="input-group input-group-lg w-25" type="date" id="start" name="trip-start"
                            value="@dates" min="@dates">
-                    <input type="time" />
+                    <input name="pickup_time" type="time" />
                 </div>
             </div>
             <div class="w-50 d-flex flex-column">
                 <h3>Payment Method</h3>
 
-                <select class="form-select" aria-label="payment method">
+                <select name="payment_method" class="form-select" aria-label="payment method">
                     <option selected>Select Payment Method</option>
                     <option value="gopay">GoPay</option>
                     <option value="ovo">OVO</option>
@@ -91,9 +101,8 @@
             </div>
 
         </div>
-        <button class="btn-primary mt-5">
-            Checkout
-        </button>
+        <input type="submit" class="btn-primary mt-5" value="Checkout" />
     </form>
 </div>
+}
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Security;
 using Newtonsoft.Json;
+using CanEatFrontEnd.Models.OtherDBModel;
 
 namespace CanEatFrontEnd.Controllers.Admin
 {
@@ -122,18 +123,31 @@ namespace CanEatFrontEnd.Controllers.Admin
             return RedirectToAction("Index", "AdminHome");
         }
 
-        public IActionResult deleteCustomer()
+        public async Task<IActionResult> deleteCustomer(string id)
         {
-            return View();
-        }
+            await Models.Customer.deleteCustomer(id);
+			return RedirectToAction("Index", "AdminHome");
+		}
 
-        public IActionResult deleteVendor()
+        public async Task<IActionResult> deleteVendor(string id)
         {
-            return View();
-        }
-        public IActionResult verifyVendor()
+            await Models.Vendor.deleteVendor(id);
+			return RedirectToAction("Index", "AdminHome");
+		}
+        public async Task<IActionResult> verifyVendor(string id)
         {
-            return View();
-        }
+            Models.Vendor v = await Models.Vendor.getVendor(id);
+            VendorEditModel model = new VendorEditModel();
+            model.id = id;
+            model.name = v.Name;
+            model.email = v.Email;
+            model.phone = v.Phone;
+            model.password = v.Password;
+            model.status = true;
+            model.company_name = v.Company.Name;
+            await Models.Vendor.editVendor(model);
+
+            return RedirectToAction("Index", "AdminHome");
+		}
     }
 }

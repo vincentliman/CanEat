@@ -1,4 +1,5 @@
 ﻿@using CanEatFrontEnd.Models.PageModel.CustomerDishDetail;
+@using System.IO;
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -12,10 +13,20 @@
     <h3>Dish Details</h3>
 </div>
 <div class="dish-detail d-flex flex-row gap-3 mb-4">
+
     @{
-        var fileName = Model.currDish.Id+".jpg";
-     }
-    <img class="food-img img-thumbnail" src="~/Assets/Food/@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;" />
+        var fileName = Model.currDish.Id + ".jpg";
+        var path = Environment.CurrentDirectory + "\\wwwroot\\Assets\\Vendor\\" + fileName;
+    }
+    @if (File.Exists(path))
+    {
+        <img class="food-img img-thumbnail" src="~/Assets/Food/@fileName" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;" />
+    }
+    else
+    {
+        <img class="food-img img-thumbnail" src="~/Assets/nebula.jpg" style="width:20vw; height:25vh; object-fit: cover; object-position: 25% 25%; overflow: hidden;" />
+    }
+    
     <div class="food-info">
         <div class="food-name fw-bolder fs-1">@Model.currDish.Name</div>
         <div class="food-price fw-bold fs-3">Rp @Model.currDish.Price.ToString("#,##0")</div>
@@ -23,28 +34,28 @@
     </div>
     
 </div>
-<form class="mb-4">
+<form class="mb-4" asp-action="addtoCart" asp-controller="CustomerDishDetail" asp-route-foodId="@Model.currDish.Id" onsubmit="return validation()">
     <divm class="d-flex flex-row justify-content-between">
         <div class="quantity-info w-25">
             <h5>Quantity</h5>
             <h6>*Required</h6>
             <div class="input-group mb-3 d-flex flex-row align-items-center w-50">
                 <button class="btn btn-outline-secondary" id="minus-button" type="button">-</button>
-                <input type="text" value="0" id="qty" class="quantity form-control" placeholder="Quantity" aria-label="">
+                <input name="qty" type="text" value="0" id="qty" class="quantity form-control" placeholder="Quantity" aria-label="">
                 <button class="btn btn-outline-secondary" id="plus-button" type="button">+</button>
             </div>
         </div>
         <div class="notes-info w-75">
             <h5>Notes</h5>
             <h6>optional</h6>
-            <textarea class="form-control" rows="3" placeholder="Customer's notes"></textarea>
+            <textarea name="notes" class="form-control" rows="3" placeholder="Customer's notes"></textarea>
         </div>
 </divm>
-    
+    <div class="cart-btn">
+        <input id="cart-btn" type="submit" class="btn btn-primary" value="Add to Cart"/>
+    </div>
 </form>
-<div class="cart-btn">
-    <button id="cart-btn" type="button" class="btn btn-primary">Add to Cart</button>
-</div>
+
 
 <script>
     const minusButton = document.getElementById("minus-button");
